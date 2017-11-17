@@ -16,8 +16,8 @@ public class Room : MonoBehaviour
 
     public ERoomState RoomState = ERoomState.HeadGear;
 
-    public int GridPosX;
-    public int GridPosY;
+    public int GridPosRow;
+    public int GridPosCol;
 
 	public Sprite[] Bcg;
 	public Sprite[] Frg;

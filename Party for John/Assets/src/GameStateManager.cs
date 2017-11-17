@@ -14,6 +14,13 @@ public class GameStateManager : MonoBehaviour
 
     public ActionCard ActionCardSelected { get; private set; }
 
+    public int RoomsRows = 5;
+    public int RoomsCols = 5;
+
+    public Room RoomPrefab;
+
+    private List<Room> Rooms;
+
     private enum EState
     {
         SelectActionCard,
@@ -24,7 +31,21 @@ public class GameStateManager : MonoBehaviour
     private void Start ()
     {
         DayTimeRemaining = DayLength;
-	}
+
+        Rooms = new List<Room>();
+
+        for (int row = 0; row< RoomsRows; row++)
+        {
+            for (int col = 0; col< RoomsRows; col++)
+            {
+                Vector3 pos = new Vector3(-2 + row, -2 + col, 1);
+                Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
+                room.GridPosRow = row;
+                room.GridPosCol = col;
+                Rooms.Add(room);
+            }
+        }
+    }
 
     // ------------------------------------------------------------------------------------------------------------------
     private void Update ()
