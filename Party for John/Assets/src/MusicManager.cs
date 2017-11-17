@@ -9,7 +9,7 @@ public class MusicManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		AudioSource audio = GetComponent<AudioSource> ();
+		AudioSource audio = GetComponents<AudioSource> ()[0];
 		audio.clip = music;
 		audio.Play ();
 	}

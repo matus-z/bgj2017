@@ -226,3 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e898fc815badd41b6b713080256d406b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  click: {fileID: 8300000, guid: 63bf13190e5414bdc99c8e47f1a5a041, type: 3}
+  error: {fileID: 8300000, guid: c324a80c857e74dd0b8edd0c882a7d4b, type: 3}
+  emp: {fileID: 8300000, guid: 0daaeb769adb14e35ae4b4fa43f493ff, type: 3}
+  doorbell: {fileID: 8300000, guid: a3eb3459cdb424ad9bab1266ae59263a, type: 3}
+  phone: {fileID: 8300000, guid: fbddc1632806f42efbe071ee512fa2c6, type: 3}
+  keyboard: {fileID: 8300000, guid: cbbad7c109b734f33aa465f6ff2157e9, type: 3}
+  scream: {fileID: 8300000, guid: 10c0510645e0d4579bfca58d4aed3283, type: 3}

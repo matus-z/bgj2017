@@ -48,6 +48,8 @@ public class GameStateManager : MonoBehaviour
 
     private EDayNight DayOrNight = EDayNight.Day;
 
+	private SoundManager snd;
+
     // ------------------------------------------------------------------------------------------------------------------
     private void Start()
     {
@@ -55,6 +57,7 @@ public class GameStateManager : MonoBehaviour
         DaysRemaining = DaysUntilApocalypse;
 
         Rooms = new List<Room>();
+		snd = GameObject.Find ("AudioManager").GetComponent <SoundManager> ();
 
         System.Random rng = new System.Random();
         int rotation;
@@ -109,6 +112,7 @@ public class GameStateManager : MonoBehaviour
 
         ActionCardSelected = actionCard;
         ActionCardSelected.SetSelected(true);
+		snd.PlaySound ("click");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
