@@ -54,8 +54,8 @@ public class GameStateManager : MonoBehaviour
             for (int col = 0; col < RoomsRows; col++)
             {
                 Vector3 pos = new Vector3(
-                    -1.75f + row + ((row >= RoomsRows / 2) ? 0.3f : 0),
-                    -1.75f + col + ((col >= RoomsCols / 2) ? 0.3f : 0),
+                    -1.75f + row + ((row >= RoomsRows / 2) ? 0.5f : 0),
+                    -1.75f + col + ((col >= RoomsCols / 2) ? 0.5f : 0),
                     1);
 
 				Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
