@@ -43,14 +43,7 @@ public class GameStateManager : MonoBehaviour
         img.fillAmount = DayTimeRemaining / DayLength;
         Debug.Log(img.fillAmount);
     }
-
-    // ------------------------------------------------------------------------------------------------------------------
-    private void OnGUI()
-    {
-        // TODO Matus : draw and add style, position ...
-        GUI.Label(new Rect(2, 2, 1000, 100), "Time until the night comes : " + DayTimeRemaining);
-    }
-
+    
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectActionCard(ActionCard actionCard)
     {
