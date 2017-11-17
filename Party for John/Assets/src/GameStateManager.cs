@@ -30,9 +30,10 @@ public class GameStateManager : MonoBehaviour
     private void Update ()
     {
         DayTimeRemaining -= Time.deltaTime;
-        if(DayTimeRemaining < 0)
+        if (DayTimeRemaining < 0)
         {
-            // TODO next day
+            EndDay();
+            return;
         }
 
         if (!DayProgressTimer) return;
@@ -76,5 +77,15 @@ public class GameStateManager : MonoBehaviour
     private EState GetState()
     {
         return ActionCardSelected ? EState.SelectRoom : EState.SelectActionCard;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void EndDay()
+    {
+        DayTimeRemaining = DayLength;
+
+        if (ActionCardSelected) ActionCardSelected.SetSelected(false);
+
+        ActionCardSelected = null;
     }
 }
