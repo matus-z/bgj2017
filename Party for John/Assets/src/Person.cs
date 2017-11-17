@@ -18,7 +18,7 @@ public class Person : MonoBehaviour
     [Tooltip("Peaple who have a boost towards me")]
     public List<GameObject> LovedOnes;
 
-    public List<Action> Actions;
+    public List<GameStateManager.EActionType> ActionsEnabled;
 
     private bool IsActive;
 
@@ -48,8 +48,6 @@ public class Person : MonoBehaviour
     {
         GameObject gameState = GameObject.Find("GameState");
         GameStateManager gsm = gameState.GetComponent<GameStateManager>();
-        gsm.ActorSelected = this;
-
-        Debug.Log(gameObject.name);
+        gsm.SelectActor(this);
     }
 }

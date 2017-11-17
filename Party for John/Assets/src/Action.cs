@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Action : MonoBehaviour
 {
     public string Name;
+
+    public string Description;
 
     public float PluggedCost;
 
@@ -19,5 +23,13 @@ public class Action : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    void OnMouseDown()
+    {
+        GameObject gameState = GameObject.Find("GameState");
+        GameStateManager gsm = gameState.GetComponent<GameStateManager>();
+        gsm.SelectAction(this);
     }
 }
