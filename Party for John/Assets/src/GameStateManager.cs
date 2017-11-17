@@ -18,13 +18,13 @@ public class GameStateManager : MonoBehaviour
     }
     
     // ------------------------------------------------------------------------------------------------------------------
-    void Start ()
+    private void Start ()
     {
         DayTimeRemaining = DayLength;
 	}
 
     // ------------------------------------------------------------------------------------------------------------------
-    void Update ()
+    private void Update ()
     {
         DayTimeRemaining -= Time.deltaTime;
     }
@@ -61,8 +61,6 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private EState GetState()
     {
-        return ActionCardSelected
-            ? EState.SelectRoom
-            : EState.SelectActionCard;
+        return ActionCardSelected ? EState.SelectRoom : EState.SelectActionCard;
     }
 }

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edd0ee30b4da724b8981acc9ba261e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayLength: 100
+  DayLength: 30
 --- !u!1001 &108417781
 Prefab:
   m_ObjectHideFlags: 0
