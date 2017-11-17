@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edd0ee30b4da724b8981acc9ba261e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayLength: 30
+  DayLength: 10
   DayProgressTimer: {fileID: 1733231683}
   RoomsRows: 5
   RoomsCols: 5
