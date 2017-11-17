@@ -35,9 +35,9 @@ public class GameStateManager : MonoBehaviour
 
         Rooms = new List<Room>();
 
-        for (int row = 0; row< RoomsRows; row++)
+        for (int row = 0; row < RoomsRows; row++)
         {
-            for (int col = 0; col< RoomsRows; col++)
+            for (int col = 0; col < RoomsRows; col++)
             {
                 Vector3 pos = new Vector3(-2 + row, -2 + col, 1);
                 Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
