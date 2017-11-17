@@ -16,8 +16,8 @@ public class Room : MonoBehaviour
 
     public ERoomState RoomState = ERoomState.HeadGear;
 
-    public int GridPosX;
-    public int GridPosY;
+    public int GridPosRow;
+    public int GridPosCol;
 
 	public Sprite[] Bcg;
 	public Sprite[] Frg;
@@ -44,14 +44,33 @@ public class Room : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ImproveRoomState()
+    public bool ImproveRoomState()
     {
         int rsNum = (int) RoomState;
-        if (rsNum > 0) rsNum -= 1;
+        if (rsNum <= 0) return false;
+
+        rsNum -= 1;
 
         RoomState = (ERoomState) rsNum;
 
         RedrawSprite();
+
+        return true;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public bool DarkenRoomState()
+    {
+        int rsNum = (int) RoomState;
+        if (rsNum >= 3) return false;
+
+        rsNum += 1;
+
+        RoomState = (ERoomState) rsNum;
+
+        RedrawSprite();
+
+        return true;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
