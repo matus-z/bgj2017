@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,11 @@ public class GameStateManager : MonoBehaviour
 
     [Tooltip("Timer object")]
     public GameObject DayProgressTimer;
+
+    public GameObject GameplayScreen;
+    public GameObject WinScreen;
+    public GameObject LoseScreen;
+    public GameObject NightScreen;
 
     private float DayTimeRemaining;
 
@@ -91,9 +97,9 @@ public class GameStateManager : MonoBehaviour
             case ActionCard.EApplyTo.Global: ApplyActionTo(null, null); break;
         }
 
-        //ActionCardSelected.ApplyAction(room);
         ActionCardSelected.SetSelected(false);
         ActionCardSelected = null;
+        SolveWinLose();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -132,6 +138,38 @@ public class GameStateManager : MonoBehaviour
             Rooms[r].DarkenRoomState();
             //if (hasDarkened)
             roomsToDarken--;
+        }
+
+        SolveWinLose();
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void SolveWinLose()
+    {
+        var RoomsClean = Rooms.Where(room => room.RoomState == Room.ERoomState.Clean).ToList();
+        if (RoomsClean.Count == Rooms.Count)
+        {
+            GameplayScreen.SetActive(false);
+            WinScreen.SetActive(true);
+            LoseScreen.SetActive(false);
+            NightScreen.SetActive(false);
+
+            foreach (Room room in Rooms) Destroy(room.gameObject);
+            Rooms.Clear();
+            return;
+        }
+
+        var RoomsHeadGear = Rooms.Where(room => room.RoomState == Room.ERoomState.HeadGear).ToList();
+        if (RoomsHeadGear.Count == Rooms.Count)
+        {
+            GameplayScreen.SetActive(false);
+            WinScreen.SetActive(false);
+            LoseScreen.SetActive(true);
+            NightScreen.SetActive(false);
+
+            foreach (Room room in Rooms) Destroy(room.gameObject);
+            Rooms.Clear();
+            return;
         }
     }
 }
