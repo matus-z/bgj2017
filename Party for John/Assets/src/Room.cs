@@ -50,29 +50,17 @@ public class Room : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public bool ImproveRoomState()
+    public void ChangeRoomState(int change)
     {
-        if (RoomState == ERoomState.Clean) return false;
+        int rsNum = (int) RoomState + change;
 
-        int rsNum = (int) RoomState - 1;
+        if (rsNum < 0) rsNum = 0;
+        if (rsNum > 3) rsNum = 3;
+
         RoomState = (ERoomState) rsNum;
-
         RedrawSprite();
-        return true;
     }
-
-    // ------------------------------------------------------------------------------------------------------------------
-    public bool DarkenRoomState()
-    {
-        if (RoomState == ERoomState.HeadGear) return false;
-
-        int rsNum = (int) RoomState + 1;
-        RoomState = (ERoomState) rsNum;
-
-        RedrawSprite();
-        return true;
-    }
-
+    
     // ------------------------------------------------------------------------------------------------------------------
     private void RedrawSprite()
     {

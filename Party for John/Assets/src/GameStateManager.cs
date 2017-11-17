@@ -121,10 +121,10 @@ public class GameStateManager : MonoBehaviour
         switch (ActionCardSelected.Type)
         {
             case ActionCard.EActionType.FacebookStatus: ActionFacebookStatus(); break;
-            case ActionCard.EActionType.PhoneCall: break;
-            case ActionCard.EActionType.EMP: break;
-            case ActionCard.EActionType.ScreamOfTruth: break;
-            case ActionCard.EActionType.PersonalVisit: break;
+            case ActionCard.EActionType.PhoneCall: ActionPhoneCall(); break;
+            case ActionCard.EActionType.EMP: ActionEMP(); break;
+            case ActionCard.EActionType.ScreamOfTruth: ActionScreamOfTruth(); break;
+            case ActionCard.EActionType.PersonalVisit: ActionPersonalVisit(); break;
         }
         
         ActionCardSelected.SetSelected(false);
@@ -136,17 +136,35 @@ public class GameStateManager : MonoBehaviour
     public void ActionFacebookStatus()
     {
         var rPhone = AllInState(Room.ERoomState.Phone);
-        foreach (Room r in rPhone)
-            ActionCardSelected.ApplyImprove(r);
+        foreach (Room r in rPhone) ActionCardSelected.ApplyChange(r, -1);
 
         var rPc = AllInState(Room.ERoomState.Pc);
-        foreach (Room r in rPc)
-        {
-            if(RandBool50Perc())
-                ActionCardSelected.ApplyImprove(r);
-            else
-                ActionCardSelected.ApplyDarken(r);
-        }
+        foreach (Room r in rPc) ActionCardSelected.ApplyChange(r, RandBool50Perc() ? - 1 : 1);
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void ActionPhoneCall()
+    {
+        // TODO
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void ActionEMP()
+    {
+        var rHg = AllInState(Room.ERoomState.HeadGear);
+        foreach (Room r in rHg) ActionCardSelected.ApplyChange(r, RandBool50Perc() ? -1 : -2);
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void ActionScreamOfTruth()
+    {
+        // TODO
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void ActionPersonalVisit()
+    {
+        // TODO
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -178,9 +196,7 @@ public class GameStateManager : MonoBehaviour
         while (roomsToDarken > 0)
         {
             int r = rnd.Next(Rooms.Count);
-            //bool hasDarkened = 
-            Rooms[r].DarkenRoomState();
-            //if (hasDarkened)
+            Rooms[r].ChangeRoomState(1);
             roomsToDarken--;
         }
 
@@ -270,6 +286,7 @@ public class GameStateManager : MonoBehaviour
     private bool RandBool50Perc()
     {
         System.Random rng = new System.Random();
+        Debug.Log(rng.Next(2));
         return rng.Next(2) >= 1;
     }
 }

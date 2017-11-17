@@ -47,16 +47,9 @@ public class ActionCard : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ApplyImprove(Room r)
+    public void ApplyChange(Room r, int change = 0)
     {
-        r.ImproveRoomState();
-		Cooltime = Cooldown;
-    }
-
-    // ------------------------------------------------------------------------------------------------------------------
-    public void ApplyDarken(Room r)
-    {
-        r.DarkenRoomState();
+        r.ChangeRoomState(change);
         Cooltime = Cooldown;
     }
 
