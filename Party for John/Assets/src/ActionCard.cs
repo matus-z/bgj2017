@@ -12,16 +12,17 @@ public class ActionCard : MonoBehaviour
     [Tooltip("Cooldown in sec")]
     public float Cooldown;
     
-    public enum EApplyTo
+    public enum EActionType
     {
-        Room,
-        Row,
-        Col,
-        Global
+        FacebookStatus,
+        PhoneCall,
+        EMP,
+        ScreamOfTruth,
+        PersonalVisit
     };
 
-    [Tooltip("Where this action should be applied to")]
-    public EApplyTo ApplyTo;
+    [Tooltip("Action type")]
+    public EActionType Type;
 
     private float Cooltime; 
     private bool IsSelected;
@@ -46,10 +47,17 @@ public class ActionCard : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ApplyAction(Room r)
+    public void ApplyImprove(Room r)
     {
         r.ImproveRoomState();
 		Cooltime = Cooldown;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void ApplyDarken(Room r)
+    {
+        r.DarkenRoomState();
+        Cooltime = Cooldown;
     }
 
     // ------------------------------------------------------------------------------------------------------------------

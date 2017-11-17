@@ -46,18 +46,18 @@ public class GameStateManager : MonoBehaviour
         Night
     }
 
-    EDayNight DayOrNight = EDayNight.Day;
+    private EDayNight DayOrNight = EDayNight.Day;
 
     // ------------------------------------------------------------------------------------------------------------------
-    private void Start ()
+    private void Start()
     {
         TimeRemaining = DayLength;
         DaysRemaining = DaysUntilApocalypse;
 
         Rooms = new List<Room>();
 
-		System.Random rng = new System.Random();
-		int rotation;
+        System.Random rng = new System.Random();
+        int rotation;
 
         for (int row = 0; row < RoomsRows; row++)
         {
@@ -68,12 +68,12 @@ public class GameStateManager : MonoBehaviour
                     -1.75f + col + ((col >= RoomsCols / 2) ? 0.3f : 0),
                     1);
 
-				Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
+                Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
                 room.Row = row;
                 room.Col = col;
                 room.transform.parent = GameplayScreen.transform;
-				rotation = -90 * rng.Next (2);
-				room.Rotate (rotation);
+                rotation = -90 * rng.Next(2);
+                room.Rotate(rotation);
                 Rooms.Add(room);
             }
         }
@@ -82,15 +82,15 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    private void Update ()
+    private void Update()
     {
         TimeRemaining -= Time.deltaTime;
         if (TimeRemaining < 0)
         {
-            switch(DayOrNight)
+            switch (DayOrNight)
             {
-                case EDayNight.Day : EndDay(); return; 
-                case EDayNight.Night : EndNight(); return;
+                case EDayNight.Day: EndDay(); return;
+                case EDayNight.Night: EndNight(); return;
             }
         }
 
@@ -100,7 +100,7 @@ public class GameStateManager : MonoBehaviour
 
         img.fillAmount = TimeRemaining / DayLength;
     }
-    
+
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectActionCard(ActionCard actionCard)
     {
@@ -118,28 +118,34 @@ public class GameStateManager : MonoBehaviour
         if (!room) return;
         if (!ActionCardSelected) return;
 
-        switch (ActionCardSelected.ApplyTo)
+        switch (ActionCardSelected.Type)
         {
-            case ActionCard.EApplyTo.Room: ApplyActionTo(room.Row, room.Col); break;
-            case ActionCard.EApplyTo.Row: ApplyActionTo(room.Row, null); break;
-            case ActionCard.EApplyTo.Col: ApplyActionTo(null, room.Col); break;
-            case ActionCard.EApplyTo.Global: ApplyActionTo(null, null); break;
+            case ActionCard.EActionType.FacebookStatus: ActionFacebookStatus(); break;
+            case ActionCard.EActionType.PhoneCall: break;
+            case ActionCard.EActionType.EMP: break;
+            case ActionCard.EActionType.ScreamOfTruth: break;
+            case ActionCard.EActionType.PersonalVisit: break;
         }
-
+        
         ActionCardSelected.SetSelected(false);
         ActionCardSelected = null;
-        SolveWinLose();
+        SolveWin();
     }
-
+    
     // ------------------------------------------------------------------------------------------------------------------
-    public void ApplyActionTo(int? row, int? col)
+    public void ActionFacebookStatus()
     {
-        foreach (Room room in Rooms)
-        {
-            if (row.HasValue && row.Value != room.Row) continue;
-            if (col.HasValue && col.Value != room.Col) continue;
+        var rPhone = AllInState(Room.ERoomState.Phone);
+        foreach (Room r in rPhone)
+            ActionCardSelected.ApplyImprove(r);
 
-            ActionCardSelected.ApplyAction(room);
+        var rPc = AllInState(Room.ERoomState.Pc);
+        foreach (Room r in rPc)
+        {
+            if(RandBool50Perc())
+                ActionCardSelected.ApplyImprove(r);
+            else
+                ActionCardSelected.ApplyDarken(r);
         }
     }
 
@@ -178,7 +184,7 @@ public class GameStateManager : MonoBehaviour
             roomsToDarken--;
         }
 
-        bool isWinOrLose = SolveWinLose();
+        bool isWinOrLose = SolveLose();
         if (isWinOrLose) return;
 
         DayOrNight = EDayNight.Night;
@@ -205,10 +211,10 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    private bool SolveWinLose()
+    private bool SolveWin()
     {
-        var RoomsClean = Rooms.Where(room => room.RoomState == Room.ERoomState.Clean).ToList();
-        if (RoomsClean.Count == Rooms.Count)
+        var rCl = AllInState(Room.ERoomState.Clean);
+        if (rCl.Count == Rooms.Count)
         {
             GameplayScreen.SetActive(false);
             WinScreen.SetActive(true);
@@ -219,9 +225,15 @@ public class GameStateManager : MonoBehaviour
             Rooms.Clear();
             return true;
         }
+        
+        return false;
+    }
 
-        var RoomsHeadGear = Rooms.Where(room => room.RoomState == Room.ERoomState.HeadGear).ToList();
-        if (RoomsHeadGear.Count == Rooms.Count || DaysRemaining < 0)
+    // ------------------------------------------------------------------------------------------------------------------
+    private bool SolveLose()
+    {
+        var rHg = AllInState(Room.ERoomState.HeadGear);
+        if (rHg.Count == Rooms.Count || DaysRemaining < 0)
         {
             GameplayScreen.SetActive(false);
             WinScreen.SetActive(false);
@@ -246,5 +258,18 @@ public class GameStateManager : MonoBehaviour
         if (!txt) return;
 
         txt.text = DaysRemaining.ToString();
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private List<Room> AllInState(Room.ERoomState rs)
+    {
+        return Rooms.Where(room => room.RoomState == rs).ToList();
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private bool RandBool50Perc()
+    {
+        System.Random rng = new System.Random();
+        return rng.Next(2) >= 1;
     }
 }

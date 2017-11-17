@@ -58,22 +58,18 @@ public class Room : MonoBehaviour
         RoomState = (ERoomState) rsNum;
 
         RedrawSprite();
-
         return true;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     public bool DarkenRoomState()
     {
-        int rsNum = (int) RoomState;
-        if (rsNum >= 3) return false;
+        if (RoomState == ERoomState.HeadGear) return false;
 
-        rsNum += 1;
-
+        int rsNum = (int) RoomState + 1;
         RoomState = (ERoomState) rsNum;
 
         RedrawSprite();
-
         return true;
     }
 
@@ -82,6 +78,5 @@ public class Room : MonoBehaviour
     {
 		bcgrender.sprite = Bcg[(int)RoomState];
 		frgrender.sprite = Frg [(int)RoomState];
-
     }
 }
