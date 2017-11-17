@@ -19,15 +19,18 @@ public class Room : MonoBehaviour
     public int GridPosX;
     public int GridPosY;
 
-    public Sprite BcgClean;
-    public Sprite BcgPhone;
-    public Sprite BcgPc;
-    public Sprite BcgHeadGear;
+	public Sprite[] Bcg;
+	public Sprite[] Frg;
 
+	private SpriteRenderer bcgrender;
+	private SpriteRenderer frgrender;
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         RoomState = ERoomState.HeadGear;
+		bcgrender = GetComponentsInChildren<SpriteRenderer> ()[1];
+		frgrender = GetComponentsInChildren<SpriteRenderer> () [2];
+
         RedrawSprite();
     }
 
@@ -54,12 +57,8 @@ public class Room : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private void RedrawSprite()
     {
-        switch(RoomState)
-        {
-            case ERoomState.Clean : GetComponent<SpriteRenderer>().sprite = BcgClean; break;
-            case ERoomState.Phone : GetComponent<SpriteRenderer>().sprite = BcgPhone; break;
-            case ERoomState.Pc : GetComponent<SpriteRenderer>().sprite = BcgPc; break;
-            case ERoomState.HeadGear : GetComponent<SpriteRenderer>().sprite = BcgHeadGear; break;
-        }
+		bcgrender.sprite = Bcg[(int)RoomState];
+		frgrender.sprite = Frg [(int)RoomState];
+
     }
 }
