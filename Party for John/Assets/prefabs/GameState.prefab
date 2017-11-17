@@ -52,12 +52,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DayLength: 10
+  DaysUntilApocalypse: 3
   DayProgressTimer: {fileID: 0}
   GameplayScreen: {fileID: 0}
   WinScreen: {fileID: 0}
   LoseScreen: {fileID: 0}
   NightScreen: {fileID: 0}
-  RoomsRows: 5
-  RoomsCols: 5
+  RoomsRows: 4
+  RoomsCols: 4
   RoomPrefab: {fileID: 114783205949008464, guid: 785cc3f35f2960045add58db85b69cfe,
     type: 2}
