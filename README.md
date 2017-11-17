@@ -1,1 +1,3 @@
-# bgj2017
+# Bratislava Game Jam 2017
+
+- http://bratislavagamejam.sk/en/
