@@ -41,8 +41,8 @@ public class GameStateManager : MonoBehaviour
             {
                 Vector3 pos = new Vector3(-2 + row, -2 + col, 1);
                 Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
-                room.GridPosRow = row;
-                room.GridPosCol = col;
+                room.Row = row;
+                room.Col = col;
                 Rooms.Add(room);
             }
         }
@@ -82,15 +82,16 @@ public class GameStateManager : MonoBehaviour
         if (!room) return;
         if (!ActionCardSelected) return;
 
+        Debug.Log(ActionCardSelected.ApplyTo);
         switch (ActionCardSelected.ApplyTo)
         {
-            case ActionCard.EApplyTo.Room: ApplyActionTo(row: room.GridPosRow, col: room.GridPosCol); break;
-            case ActionCard.EApplyTo.Row: break;
-            case ActionCard.EApplyTo.Col: break;
-            case ActionCard.EApplyTo.Global: break;
+            case ActionCard.EApplyTo.Room: ApplyActionTo(room.Row, room.Col); break;
+            case ActionCard.EApplyTo.Row: ApplyActionTo(room.Row, null); break;
+            case ActionCard.EApplyTo.Col: ApplyActionTo(null, room.Col); break;
+            case ActionCard.EApplyTo.Global: ApplyActionTo(null, null); break;
         }
 
-        ActionCardSelected.ApplyAction(room);
+        //ActionCardSelected.ApplyAction(room);
         ActionCardSelected.SetSelected(false);
         ActionCardSelected = null;
     }
@@ -98,8 +99,13 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     public void ApplyActionTo(int? row, int? col)
     {
-        //GameObject.
-        //foreach()
+        foreach (Room room in Rooms)
+        {
+            if (row.HasValue && row.Value != room.Row) continue;
+            if (col.HasValue && col.Value != room.Col) continue;
+
+            ActionCardSelected.ApplyAction(room);
+        }
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -122,7 +128,8 @@ public class GameStateManager : MonoBehaviour
         while (roomsToDarken > 0)
         {
             int r = rnd.Next(Rooms.Count);
-            bool hasDarkened = Rooms[r].DarkenRoomState();
+            //bool hasDarkened = 
+            Rooms[r].DarkenRoomState();
             //if (hasDarkened)
             roomsToDarken--;
         }
