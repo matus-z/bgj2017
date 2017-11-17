@@ -43,6 +43,7 @@ public class GameStateManager : MonoBehaviour
         if (!actionCard) return;
 
         ActionCardSelected = actionCard;
+        ActionCardSelected.SetSelected(true);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -53,6 +54,8 @@ public class GameStateManager : MonoBehaviour
         if (!ActionCardSelected) return;
 
         ActionCardSelected.ApplyAction(room);
+        ActionCardSelected.SetSelected(false);
+        ActionCardSelected = null;
     }
 
     // ------------------------------------------------------------------------------------------------------------------

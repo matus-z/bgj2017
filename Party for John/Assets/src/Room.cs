@@ -19,10 +19,10 @@ public class Room : MonoBehaviour
     public int GridPosX;
     public int GridPosY;
 
-    public Sprite BackgroundClean;
-    public Sprite BackgroundPhone;
-    public Sprite BackgroundPc;
-    public Sprite BackgroundHeadGear;
+    public Sprite BcgClean;
+    public Sprite BcgPhone;
+    public Sprite BcgPc;
+    public Sprite BcgHeadGear;
 
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
@@ -56,10 +56,10 @@ public class Room : MonoBehaviour
     {
         switch(RoomState)
         {
-            case ERoomState.Clean : GetComponent<SpriteRenderer>().sprite = BackgroundClean; break;
-            case ERoomState.Phone : GetComponent<SpriteRenderer>().sprite = BackgroundPhone; break;
-            case ERoomState.Pc : GetComponent<SpriteRenderer>().sprite = BackgroundPc; break;
-            case ERoomState.HeadGear : GetComponent<SpriteRenderer>().sprite = BackgroundHeadGear; break;
+            case ERoomState.Clean : GetComponent<SpriteRenderer>().sprite = BcgClean; break;
+            case ERoomState.Phone : GetComponent<SpriteRenderer>().sprite = BcgPhone; break;
+            case ERoomState.Pc : GetComponent<SpriteRenderer>().sprite = BcgPc; break;
+            case ERoomState.HeadGear : GetComponent<SpriteRenderer>().sprite = BcgHeadGear; break;
         }
     }
 }

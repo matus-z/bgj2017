@@ -6,6 +6,22 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class ActionCard : MonoBehaviour
 {
+    public Sprite BcgSelected;
+    public Sprite BcgUnselected;
+
+    [Tooltip("Cooldown in sec")]
+    public float Cooldown;
+
+    private bool IsSelected;
+
+    // ------------------------------------------------------------------------------------------------------------------
+    void Start()
+    {
+        IsSelected = false;
+
+        RedrawSprite();
+    }
+
     // ------------------------------------------------------------------------------------------------------------------
     private void OnMouseDown()
     {
@@ -19,5 +35,20 @@ public class ActionCard : MonoBehaviour
     public void ApplyAction(Room r)
     {
         r.ImproveRoomState();
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void RedrawSprite()
+    {
+        GetComponent<SpriteRenderer>().sprite = IsSelected
+            ? BcgSelected
+            : BcgUnselected;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void SetSelected(bool selected)
+    {
+        IsSelected = selected;
+        RedrawSprite();
     }
 }

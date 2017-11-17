@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4435793678926094}
+  - component: {fileID: 114175949784628382}
   - component: {fileID: 212389269436278638}
   - component: {fileID: 61984001877151540}
-  - component: {fileID: 114175949784628382}
   m_Layer: 0
   m_Name: ActionCard
   m_TagString: Untagged
@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87538947ac2101489c58024bf414030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BcgSelected: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  BcgUnselected: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!212 &212389269436278638
 SpriteRenderer:
   m_ObjectHideFlags: 1
