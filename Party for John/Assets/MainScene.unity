@@ -1608,7 +1608,7 @@ Transform:
   m_PrefabInternal: {fileID: 335244710}
 --- !u!1 &1733231683 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1211342753298300, guid: 197aa2d6190756e44b2492c871ccdef9,
+  m_PrefabParentObject: {fileID: 1252997872731482, guid: 197aa2d6190756e44b2492c871ccdef9,
     type: 2}
   m_PrefabInternal: {fileID: 1204965010}
 --- !u!4 &1749079034 stripped
