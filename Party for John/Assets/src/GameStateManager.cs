@@ -57,6 +57,8 @@ public class GameStateManager : MonoBehaviour
                 Rooms.Add(room);
             }
         }
+
+        UpdateDaysRemainingText();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -136,6 +138,7 @@ public class GameStateManager : MonoBehaviour
         if (IsGameEnd()) return;
 
         DaysRemaining--;
+        UpdateDaysRemainingText();
 
         DayTimeRemaining = DayLength;
 
@@ -174,7 +177,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         var RoomsHeadGear = Rooms.Where(room => room.RoomState == Room.ERoomState.HeadGear).ToList();
-        if (RoomsHeadGear.Count == Rooms.Count || DaysRemaining <= 0)
+        if (RoomsHeadGear.Count == Rooms.Count || DaysRemaining < 0)
         {
             GameplayScreen.SetActive(false);
             WinScreen.SetActive(false);
@@ -185,5 +188,17 @@ public class GameStateManager : MonoBehaviour
             Rooms.Clear();
             return;
         }
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void UpdateDaysRemainingText()
+    {
+        GameObject goDrt = GameObject.Find("DaysRemainingText");
+        if (!goDrt) return;
+
+        Text txt = goDrt.GetComponent<Text>();
+        if (!txt) return;
+
+        txt.text = DaysRemaining.ToString();
     }
 }
