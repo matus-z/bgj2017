@@ -46,14 +46,19 @@ public class GameStateManager : MonoBehaviour
 
         Rooms = new List<Room>();
 
+		System.Random rng = new System.Random();
+		int rotation;
+
         for (int row = 0; row < RoomsRows; row++)
         {
             for (int col = 0; col < RoomsRows; col++)
             {
                 Vector3 pos = new Vector3(-2 + row, -2 + col, 1);
-                Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
+				Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
                 room.Row = row;
                 room.Col = col;
+				rotation = -90 * rng.Next (2);
+				room.Rotate (rotation);
                 Rooms.Add(room);
             }
         }
