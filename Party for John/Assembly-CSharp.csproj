@@ -54,6 +54,7 @@
      <Compile Include="Assets\src\ActionCard.cs" />
      <Compile Include="Assets\src\GameStateManager.cs" />
      <Compile Include="Assets\src\Room.cs" />
+     <Compile Include="Assets\ToolTip.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
