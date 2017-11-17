@@ -11,8 +11,19 @@ public class ActionCard : MonoBehaviour
 
     [Tooltip("Cooldown in sec")]
     public float Cooldown;
+    
+    public enum EApplyTo
+    {
+        Room,
+        Row,
+        Col,
+        Global
+    };
 
-	private float Cooltime; 
+    [Tooltip("Where this action should be applied to")]
+    public EApplyTo ApplyTo;
+
+    private float Cooltime; 
     private bool IsSelected;
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -56,8 +67,10 @@ public class ActionCard : MonoBehaviour
         RedrawSprite();
     }
 
-	public void FixedUpdate(){
-		if (Cooltime > 0)
+    // ------------------------------------------------------------------------------------------------------------------
+	public void FixedUpdate()
+    {
+        if (Cooltime > 0)
 			Cooltime -= Time.deltaTime;
 		else
 			Cooltime = 0;

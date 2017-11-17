@@ -24,6 +24,7 @@ public class Room : MonoBehaviour
 
 	private SpriteRenderer bcgrender;
 	private SpriteRenderer frgrender;
+
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {

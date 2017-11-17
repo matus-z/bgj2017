@@ -491,6 +491,10 @@ Prefab:
       propertyPath: m_Name
       value: ActionCardOneRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 1424337350404166, guid: 8362f22e7b4ef4c46abbfbdb7900588a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8362f22e7b4ef4c46abbfbdb7900588a, type: 2}
   m_IsPrefabParent: 0

@@ -82,9 +82,24 @@ public class GameStateManager : MonoBehaviour
         if (!room) return;
         if (!ActionCardSelected) return;
 
+        switch (ActionCardSelected.ApplyTo)
+        {
+            case ActionCard.EApplyTo.Room: ApplyActionTo(row: room.GridPosRow, col: room.GridPosCol); break;
+            case ActionCard.EApplyTo.Row: break;
+            case ActionCard.EApplyTo.Col: break;
+            case ActionCard.EApplyTo.Global: break;
+        }
+
         ActionCardSelected.ApplyAction(room);
         ActionCardSelected.SetSelected(false);
         ActionCardSelected = null;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    public void ApplyActionTo(int? row, int? col)
+    {
+        //GameObject.
+        //foreach()
     }
 
     // ------------------------------------------------------------------------------------------------------------------
