@@ -8,8 +8,9 @@ public class GameStateManager : MonoBehaviour
     [Tooltip("Length of day (turn) in sec")]
     public float DayLength;
 
+    [Tooltip("Timer object")]
     public GameObject DayProgressTimer;
-    
+
     private float DayTimeRemaining;
 
     public ActionCard ActionCardSelected { get; private set; }
