@@ -74,8 +74,10 @@ public class ActionCard : MonoBehaviour
 			Cooltime -= Time.deltaTime;
 		else
 			Cooltime = 0;
-
-		Image i = GetComponentsInChildren<Image> ()[1];
+		
+		Image i = GetComponentsInChildren<Image>()[2];
 			i.fillAmount = Cooltime / Cooldown;
+		i = GetComponentsInChildren<Image>()[0];
+		i.color = new Color(1,1,1,IsSelected?1:0);			
 	}
 }

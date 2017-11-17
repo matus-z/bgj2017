@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114045255685729428}
   m_Layer: 0
   m_Name: Image (1)
-  m_TagString: Untagged
+  m_TagString: timer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillClockwise: 0
   m_FillOrigin: 2
 --- !u!114 &114529598018426906
 MonoBehaviour:
