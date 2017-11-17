@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour
         SelectActionCard,
         SelectRoom
     }
-    
+
     // ------------------------------------------------------------------------------------------------------------------
     private void Start ()
     {
@@ -88,7 +88,6 @@ public class GameStateManager : MonoBehaviour
         if (!room) return;
         if (!ActionCardSelected) return;
 
-        Debug.Log(ActionCardSelected.ApplyTo);
         switch (ActionCardSelected.ApplyTo)
         {
             case ActionCard.EApplyTo.Room: ApplyActionTo(room.Row, room.Col); break;
@@ -121,8 +120,16 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
+    private bool IsGameEnd()
+    {
+        return Rooms.Count == 0;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
     private void EndDay()
     {
+        if (IsGameEnd()) return;
+
         DayTimeRemaining = DayLength;
 
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
