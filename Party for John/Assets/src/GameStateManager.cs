@@ -8,33 +8,27 @@ public class GameStateManager : MonoBehaviour
     public float DayLength;
 
     public Action InviteForCoffeePrefab;
+    public Action TalkPrefab;
 
     private float DayTimeRemaining;
-
-    enum EState
-    {
-        SelectActor,
-        SelectAction,
-        SelectActedOn,
-        Animation       // or time dalay
-    }
 
     public enum EActionType
     {
         InviteForCoffee,
+        Talk,
     }
 
     public Person ActorSelected { get; private set; }
     public Action ActionSelected { get; private set; }
 
-    private EState CurrentState;
+    private List<Action> ActionsVisible;
 
     // ------------------------------------------------------------------------------------------------------------------
     // Use this for initialization
     void Start ()
     {
         DayTimeRemaining = DayLength;
-        CurrentState = EState.Animation;
+        ActionsVisible = new List<Action>();
 	}
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -65,26 +59,59 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void SelectActor(Person actor)
+    public void SelectPerson(Person person)
     {
-        ActorSelected = actor;
-        foreach (EActionType at in actor.ActionsEnabled)
+        if (ActorSelected && ActionSelected)
         {
-            switch(at)
+            Debug.Log("select person acted on" + Time.time);
+            SelectPersonActedOn(person);
+        }
+        else if (!ActorSelected && !ActionSelected)
+        {
+            Debug.Log("select person actor" + Time.time);
+            SelectPersonActor(person);
+        }
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void SelectPersonActor(Person person)
+    {
+        ActorSelected = person;
+        float xPos = 0;
+
+        foreach (EActionType at in person.ActionsEnabled)
+        {
+            Vector3 pos = person.gameObject.transform.position + Vector3.right.normalized * xPos;
+            xPos += 1;
+            switch (at)
             {
                 case EActionType.InviteForCoffee:
-                    Instantiate(InviteForCoffeePrefab, actor.gameObject.transform.position, Quaternion.identity);
+                    ActionsVisible.Add(Instantiate(InviteForCoffeePrefab, pos, Quaternion.identity));
+                    break;
+                case EActionType.Talk:
+                    ActionsVisible.Add(Instantiate(TalkPrefab, pos, Quaternion.identity));
                     break;
             }
-
-            Debug.Log(at);
         }
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void SelectPersonActedOn(Person person)
+    {
+        if (!ActionSelected)
+            return;
+
+        // TODO Apply action
+
+        // Clear all actions
+        foreach (Action a in ActionsVisible) Destroy(a.gameObject);
+        ActionsVisible.Clear();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectAction(Action action)
     {
         ActionSelected = action;
-        Debug.Log(action);
+        //Debug.Log(action);
     }
 }

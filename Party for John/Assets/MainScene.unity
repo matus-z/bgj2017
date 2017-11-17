@@ -151,6 +151,8 @@ MonoBehaviour:
   DayLength: 100
   InviteForCoffeePrefab: {fileID: 114132852924159230, guid: 4d46d810d7ace314cad8e4cdc1b16b03,
     type: 2}
+  TalkPrefab: {fileID: 114132852924159230, guid: 0b64f6f182102e44ba06a5ebb1ee3eaf,
+    type: 2}
 --- !u!1 &285495975
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +786,7 @@ Prefab:
     - target: {fileID: 114114838055253292, guid: fbedd3fe4b141ae49acf651961ab172e,
         type: 2}
       propertyPath: ActionsEnabled.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4804965381288580, guid: fbedd3fe4b141ae49acf651961ab172e, type: 2}
       propertyPath: m_LocalPosition.x
@@ -821,6 +823,11 @@ Prefab:
     - target: {fileID: 1885047542517864, guid: fbedd3fe4b141ae49acf651961ab172e, type: 2}
       propertyPath: m_Name
       value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114838055253292, guid: fbedd3fe4b141ae49acf651961ab172e,
+        type: 2}
+      propertyPath: ActionsEnabled.Array.data[1]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbedd3fe4b141ae49acf651961ab172e, type: 2}

@@ -48,6 +48,6 @@ public class Person : MonoBehaviour
     {
         GameObject gameState = GameObject.Find("GameState");
         GameStateManager gsm = gameState.GetComponent<GameStateManager>();
-        gsm.SelectActor(this);
+        gsm.SelectPerson(this);
     }
 }

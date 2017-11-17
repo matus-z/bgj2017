@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61883285084459958}
   - component: {fileID: 212323918727693294}
   m_Layer: 0
-  m_Name: InviteForCoffeeAction
+  m_Name: TalkAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ed2b270e915cb47b04960992ee4610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Invite neighbor for coffee
+  Name: Have a talk with neighbor
   Description: 
   PluggedCost: 10
   TimeToComplete: 20
