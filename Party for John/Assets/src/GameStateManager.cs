@@ -9,6 +9,9 @@ public class GameStateManager : MonoBehaviour
     [Tooltip("Length of day (turn) in sec")]
     public float DayLength;
 
+    [Tooltip("Count of days until game over")]
+    public int DaysUntilApocalypse = 3;
+
     [Tooltip("Timer object")]
     public GameObject DayProgressTimer;
 
@@ -18,6 +21,7 @@ public class GameStateManager : MonoBehaviour
     public GameObject NightScreen;
 
     private float DayTimeRemaining;
+    private int DaysRemaining;
 
     public ActionCard ActionCardSelected { get; private set; }
 
@@ -38,6 +42,7 @@ public class GameStateManager : MonoBehaviour
     private void Start ()
     {
         DayTimeRemaining = DayLength;
+        DaysRemaining = DaysUntilApocalypse;
 
         Rooms = new List<Room>();
 
@@ -130,6 +135,8 @@ public class GameStateManager : MonoBehaviour
     {
         if (IsGameEnd()) return;
 
+        DaysRemaining--;
+
         DayTimeRemaining = DayLength;
 
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
@@ -167,7 +174,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         var RoomsHeadGear = Rooms.Where(room => room.RoomState == Room.ERoomState.HeadGear).ToList();
-        if (RoomsHeadGear.Count == Rooms.Count)
+        if (RoomsHeadGear.Count == Rooms.Count || DaysRemaining <= 0)
         {
             GameplayScreen.SetActive(false);
             WinScreen.SetActive(false);
