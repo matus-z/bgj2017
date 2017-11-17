@@ -17,8 +17,8 @@ public class GameStateManager : MonoBehaviour
         Animation       // or time dalay
     }
 
-    private Person ActorSelected;
-    private Action ActionSelected;
+    public Person ActorSelected { get; set; }
+    public Action ActionSelected { get; set; }
 
     private EState CurrentState;
 

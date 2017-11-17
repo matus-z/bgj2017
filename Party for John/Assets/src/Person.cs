@@ -22,7 +22,7 @@ public class Person : MonoBehaviour
 
     private bool IsActive;
 
-    public Sprite SpriteIactive;
+    public Sprite SpriteInactive;
     public Sprite SpriteActive;
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -37,11 +37,19 @@ public class Person : MonoBehaviour
     {
         GameObject gameState = GameObject.Find("GameState");
         GameStateManager gsm = gameState.GetComponent<GameStateManager>();
-	}
+        if (!gsm.ActorSelected)
+            return;
+
+        GetComponent<SpriteRenderer>().sprite = gsm.ActorSelected == this ? SpriteActive : SpriteInactive;
+    }
 
     // ------------------------------------------------------------------------------------------------------------------
     void OnMouseDown()
     {
+        GameObject gameState = GameObject.Find("GameState");
+        GameStateManager gsm = gameState.GetComponent<GameStateManager>();
+        gsm.ActorSelected = this;
+
         Debug.Log(gameObject.name);
     }
 }
