@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BcgSelected: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   BcgUnselected: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Cooldown: 5
 --- !u!212 &212389269436278638
 SpriteRenderer:
   m_ObjectHideFlags: 1

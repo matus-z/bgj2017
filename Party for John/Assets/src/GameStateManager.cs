@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour
 {
     [Tooltip("Length of day (turn) in sec")]
     public float DayLength;
+
+    public GameObject DayProgressTimer;
     
     private float DayTimeRemaining;
 
@@ -27,6 +30,17 @@ public class GameStateManager : MonoBehaviour
     private void Update ()
     {
         DayTimeRemaining -= Time.deltaTime;
+        if(DayTimeRemaining < 0)
+        {
+            // TODO next day
+        }
+
+        if (!DayProgressTimer) return;
+        Image img = DayProgressTimer.GetComponent<Image>();
+        if (!img) return;
+
+        img.fillAmount = DayTimeRemaining / DayLength;
+        Debug.Log(img.fillAmount);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
