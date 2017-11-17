@@ -277,6 +277,11 @@ Prefab:
       propertyPath: NightScreen
       value: 
       objectReference: {fileID: 738073459}
+    - target: {fileID: 114664917679018814, guid: ea0d93a2bce5f434ba0230f66e713ef3,
+        type: 2}
+      propertyPath: NightLength
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea0d93a2bce5f434ba0230f66e713ef3, type: 2}
   m_IsPrefabParent: 0

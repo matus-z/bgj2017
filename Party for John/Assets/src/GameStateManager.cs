@@ -9,6 +9,8 @@ public class GameStateManager : MonoBehaviour
     [Tooltip("Length of day (turn) in sec")]
     public float DayLength;
 
+    public float NightLength = 1;
+
     [Tooltip("Count of days until game over")]
     public int DaysUntilApocalypse = 3;
 
@@ -20,7 +22,7 @@ public class GameStateManager : MonoBehaviour
     public GameObject LoseScreen;
     public GameObject NightScreen;
 
-    private float DayTimeRemaining;
+    private float TimeRemaining;
     private int DaysRemaining;
 
     public ActionCard ActionCardSelected { get; private set; }
@@ -38,10 +40,18 @@ public class GameStateManager : MonoBehaviour
         SelectRoom
     }
 
+    private enum EDayNight
+    {
+        Day,
+        Night
+    }
+
+    EDayNight DayOrNight = EDayNight.Day;
+
     // ------------------------------------------------------------------------------------------------------------------
     private void Start ()
     {
-        DayTimeRemaining = DayLength;
+        TimeRemaining = DayLength;
         DaysRemaining = DaysUntilApocalypse;
 
         Rooms = new List<Room>();
@@ -61,6 +71,7 @@ public class GameStateManager : MonoBehaviour
 				Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
                 room.Row = row;
                 room.Col = col;
+                room.transform.parent = GameplayScreen.transform;
 				rotation = -90 * rng.Next (2);
 				room.Rotate (rotation);
                 Rooms.Add(room);
@@ -73,18 +84,21 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private void Update ()
     {
-        DayTimeRemaining -= Time.deltaTime;
-        if (DayTimeRemaining < 0)
+        TimeRemaining -= Time.deltaTime;
+        if (TimeRemaining < 0)
         {
-            EndDay();
-            return;
+            switch(DayOrNight)
+            {
+                case EDayNight.Day : EndDay(); return; 
+                case EDayNight.Night : EndNight(); return;
+            }
         }
 
         if (!DayProgressTimer) return;
         Image img = DayProgressTimer.GetComponent<Image>();
         if (!img) return;
 
-        img.fillAmount = DayTimeRemaining / DayLength;
+        img.fillAmount = TimeRemaining / DayLength;
     }
     
     // ------------------------------------------------------------------------------------------------------------------
@@ -149,8 +163,6 @@ public class GameStateManager : MonoBehaviour
         DaysRemaining--;
         UpdateDaysRemainingText();
 
-        DayTimeRemaining = DayLength;
-
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
 
         ActionCardSelected = null;
@@ -166,11 +178,34 @@ public class GameStateManager : MonoBehaviour
             roomsToDarken--;
         }
 
-        SolveWinLose();
+        bool isWinOrLose = SolveWinLose();
+        if (isWinOrLose) return;
+
+        DayOrNight = EDayNight.Night;
+        TimeRemaining = NightLength;
+
+        GameplayScreen.SetActive(false);
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+        NightScreen.SetActive(true);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    private void SolveWinLose()
+    private void EndNight()
+    {
+        if (IsGameEnd()) return;
+
+        DayOrNight = EDayNight.Day;
+        TimeRemaining = DayLength;
+
+        GameplayScreen.SetActive(true);
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+        NightScreen.SetActive(false);
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private bool SolveWinLose()
     {
         var RoomsClean = Rooms.Where(room => room.RoomState == Room.ERoomState.Clean).ToList();
         if (RoomsClean.Count == Rooms.Count)
@@ -182,7 +217,7 @@ public class GameStateManager : MonoBehaviour
 
             foreach (Room room in Rooms) Destroy(room.gameObject);
             Rooms.Clear();
-            return;
+            return true;
         }
 
         var RoomsHeadGear = Rooms.Where(room => room.RoomState == Room.ERoomState.HeadGear).ToList();
@@ -195,8 +230,10 @@ public class GameStateManager : MonoBehaviour
 
             foreach (Room room in Rooms) Destroy(room.gameObject);
             Rooms.Clear();
-            return;
+            return true;
         }
+
+        return false;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
