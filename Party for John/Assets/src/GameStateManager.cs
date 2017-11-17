@@ -82,7 +82,7 @@ public class GameStateManager : MonoBehaviour
         foreach (EActionType at in person.ActionsEnabled)
         {
             Vector3 pos = person.gameObject.transform.position + Vector3.right.normalized * xPos;
-            xPos += 1;
+            xPos += person.gameObject.transform.GetComponent<Renderer>().bounds.size.x / 2.0f;
             switch (at)
             {
                 case EActionType.InviteForCoffee:
@@ -98,14 +98,22 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private void SelectPersonActedOn(Person person)
     {
-        if (!ActionSelected)
-            return;
+        if (!ActionSelected) return;
+        if (!ActorSelected) return;
+        if (!person) return;
+
+        Person ActedOn = person;
 
         // TODO Apply action
+
+        ActorSelected.PluggedLevel += ActionSelected.PluggedCost;
+        //ActedOn.PluggedLevel ActionSelected.
 
         // Clear all actions
         foreach (Action a in ActionsVisible) Destroy(a.gameObject);
         ActionsVisible.Clear();
+
+        ActorSelected = null;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
