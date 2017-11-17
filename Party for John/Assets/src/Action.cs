@@ -9,11 +9,13 @@ public class Action : MonoBehaviour
 
     public float TimeToComplete;
 
+    // ------------------------------------------------------------------------------------------------------------------
     // Use this for initialization
     void Start()
     {
     }
 
+    // ------------------------------------------------------------------------------------------------------------------
     // Update is called once per frame
     void Update()
     {

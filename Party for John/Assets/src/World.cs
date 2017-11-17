@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    [Tooltip("Length of day (turn) in sec")]
-    public float DayLength;
-
-    
 
     // Use this for initialization
     void Start ()

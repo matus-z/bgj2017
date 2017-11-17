@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Person : MonoBehaviour
 {
     [Tooltip("Person Name")]
@@ -18,18 +20,26 @@ public class Person : MonoBehaviour
 
     public List<Action> Actions;
 
+    private bool IsActive;
+
+    public Sprite SpriteIactive;
+    public Sprite SpriteActive;
+
+    // ------------------------------------------------------------------------------------------------------------------
     // Use this for initialization
     void Start ()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
 	}
 
+    // ------------------------------------------------------------------------------------------------------------------
+    // Update is called once per frame
+    void Update ()
+    {
+        GameObject gameState = GameObject.Find("GameState");
+        GameStateManager gsm = gameState.GetComponent<GameStateManager>();
+	}
+
+    // ------------------------------------------------------------------------------------------------------------------
     void OnMouseDown()
     {
         Debug.Log(gameObject.name);
