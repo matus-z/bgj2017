@@ -47,11 +47,9 @@ public class Room : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     public bool ImproveRoomState()
     {
-        int rsNum = (int) RoomState;
-        if (rsNum <= 0) return false;
+        if (RoomState == ERoomState.Clean) return false;
 
-        rsNum -= 1;
-
+        int rsNum = (int) RoomState - 1;
         RoomState = (ERoomState) rsNum;
 
         RedrawSprite();
