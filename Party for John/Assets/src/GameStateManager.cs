@@ -62,7 +62,6 @@ public class GameStateManager : MonoBehaviour
         if (!img) return;
 
         img.fillAmount = DayTimeRemaining / DayLength;
-        Debug.Log(img.fillAmount);
     }
     
     // ------------------------------------------------------------------------------------------------------------------
@@ -101,5 +100,15 @@ public class GameStateManager : MonoBehaviour
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
 
         ActionCardSelected = null;
+
+        System.Random rnd = new System.Random();
+        int roomsToDarken = 10;
+        while (roomsToDarken > 0)
+        {
+            int r = rnd.Next(Rooms.Count);
+            bool hasDarkened = Rooms[r].DarkenRoomState();
+            //if (hasDarkened)
+            roomsToDarken--;
+        }
     }
 }
