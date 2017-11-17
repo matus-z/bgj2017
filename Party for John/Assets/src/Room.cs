@@ -19,10 +19,16 @@ public class Room : MonoBehaviour
     public int GridPosX;
     public int GridPosY;
 
+    public Sprite BackgroundClean;
+    public Sprite BackgroundPhone;
+    public Sprite BackgroundPc;
+    public Sprite BackgroundHeadGear;
+
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         RoomState = ERoomState.HeadGear;
+        RedrawSprite();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -41,5 +47,19 @@ public class Room : MonoBehaviour
         if (rsNum > 0) rsNum -= 1;
 
         RoomState = (ERoomState) rsNum;
+
+        RedrawSprite();
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void RedrawSprite()
+    {
+        switch(RoomState)
+        {
+            case ERoomState.Clean : GetComponent<SpriteRenderer>().sprite = BackgroundClean; break;
+            case ERoomState.Phone : GetComponent<SpriteRenderer>().sprite = BackgroundPhone; break;
+            case ERoomState.Pc : GetComponent<SpriteRenderer>().sprite = BackgroundPc; break;
+            case ERoomState.HeadGear : GetComponent<SpriteRenderer>().sprite = BackgroundHeadGear; break;
+        }
     }
 }
