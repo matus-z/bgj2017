@@ -54,6 +54,7 @@
      <Compile Include="Assets\src\ActionCard.cs" />
      <Compile Include="Assets\src\GameStateManager.cs" />
      <Compile Include="Assets\src\MusicManager.cs" />
+     <Compile Include="Assets\src\NightScreen.cs" />
      <Compile Include="Assets\src\Room.cs" />
      <Compile Include="Assets\src\ScreenShake.cs" />
      <Compile Include="Assets\src\SoundManager.cs" />
