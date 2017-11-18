@@ -20,9 +20,11 @@ public class GameStateManager : MonoBehaviour
     public GameObject WinScreen;
     public GameObject LoseScreen;
     public GameObject NightScreen;
+	public GameObject backObject;
 
     private float TimeRemaining;
     private int DaysRemaining;
+
 
     public ActionCard ActionCardSelected { get; private set; }
 
@@ -223,6 +225,8 @@ public class GameStateManager : MonoBehaviour
 
         DaysRemaining--;
         UpdateDaysRemainingText();
+		Background bg = backObject.GetComponent<Background> ();
+		bg.SetSprite (false);
 
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
 
@@ -252,6 +256,9 @@ public class GameStateManager : MonoBehaviour
     public void EndNight()
     {
         if (IsGameEnd()) return;
+
+		Background bg = backObject.GetComponent<Background> ();
+		bg.SetSprite (true);
 
         DayOrNight = EDayNight.Day;
         TimeRemaining = DayLength;

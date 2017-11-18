@@ -390,6 +390,16 @@ Prefab:
       propertyPath: NightScreen
       value: 
       objectReference: {fileID: 738073459}
+    - target: {fileID: 114664917679018814, guid: ea0d93a2bce5f434ba0230f66e713ef3,
+        type: 2}
+      propertyPath: backObjdect
+      value: 
+      objectReference: {fileID: 1525115362}
+    - target: {fileID: 114664917679018814, guid: ea0d93a2bce5f434ba0230f66e713ef3,
+        type: 2}
+      propertyPath: backObject
+      value: 
+      objectReference: {fileID: 1525115362}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea0d93a2bce5f434ba0230f66e713ef3, type: 2}
   m_IsPrefabParent: 0
@@ -649,12 +659,12 @@ Prefab:
     - target: {fileID: 224858689580631750, guid: b770766b5c913f1488ba2a548e862643,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 5
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 224858689580631750, guid: b770766b5c913f1488ba2a548e862643,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 224858689580631750, guid: b770766b5c913f1488ba2a548e862643,
         type: 2}
@@ -1411,6 +1421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525115363}
   - component: {fileID: 1525115364}
+  - component: {fileID: 1525115365}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1473,6 +1484,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1525115365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1525115362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7dbef121ba088c4d93afe8976dd5216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  day: {fileID: 21300000, guid: 0dc3f8646e211a14c8aa95ecae586351, type: 3}
+  night: {fileID: 21300000, guid: 8b8fff41006676248930beb74a2b574e, type: 3}
 --- !u!1 &1605193791 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1139538574993316, guid: 4ffe1edf8532d0b4ea838997f8f7e073,
