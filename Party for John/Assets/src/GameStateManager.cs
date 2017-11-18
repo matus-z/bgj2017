@@ -290,7 +290,6 @@ public class GameStateManager : MonoBehaviour
     private bool RandBool50Perc()
     {
         System.Random rng = new System.Random();
-        Debug.Log(rng.Next(2));
         return rng.Next(2) >= 1;
     }
 }
