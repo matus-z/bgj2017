@@ -55,8 +55,10 @@
      <Compile Include="Assets\src\GameStateManager.cs" />
      <Compile Include="Assets\src\MusicManager.cs" />
      <Compile Include="Assets\src\Room.cs" />
+     <Compile Include="Assets\src\ScreenShake.cs" />
      <Compile Include="Assets\src\SoundManager.cs" />
      <Compile Include="Assets\src\ToolTip.cs" />
+     <Compile Include="Assets\src\WinLose.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
