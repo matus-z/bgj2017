@@ -55,6 +55,7 @@
      <Compile Include="Assets\src\GameStateManager.cs" />
      <Compile Include="Assets\src\MusicManager.cs" />
      <Compile Include="Assets\src\Room.cs" />
+     <Compile Include="Assets\src\ScreenShake.cs" />
      <Compile Include="Assets\src\SoundManager.cs" />
      <Compile Include="Assets\src\WinLose.cs" />
  <Reference Include="UnityEngine.UI">
