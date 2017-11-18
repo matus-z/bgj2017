@@ -27,7 +27,8 @@ public class ScreenShake : MonoBehaviour
     {
         if (ShakeProgress > 0)
         {
-            Camera.main.transform.localPosition = OriginalPos + Random.insideUnitSphere * ShakeAmount;
+            Vector3 shakeVec = Random.insideUnitCircle;
+            Camera.main.transform.localPosition = OriginalPos + shakeVec * ShakeAmount;
             ShakeProgress -= Time.deltaTime * 1.0f;
         }
         else
