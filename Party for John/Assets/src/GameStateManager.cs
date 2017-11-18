@@ -106,6 +106,10 @@ public class GameStateManager : MonoBehaviour
         img.fillAmount = TimeRemaining / DayLength;
     }
 
+	public bool isDay(){
+		return (DayOrNight == EDayNight.Day);
+	}
+
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectActionCard(ActionCard actionCard)
     {
@@ -245,7 +249,7 @@ public class GameStateManager : MonoBehaviour
         DayOrNight = EDayNight.Night;
         TimeRemaining = NightLength;
 
-        GameplayScreen.SetActive(false);
+        //GameplayScreen.SetActive(false);
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
         NightScreen.SetActive(true);
