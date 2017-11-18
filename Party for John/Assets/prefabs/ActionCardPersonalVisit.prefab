@@ -272,9 +272,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is the most awesome action tool utility skill spell procedure card
-    icon button token trigger in the welt, cause it causes casualties on both sides
-    of the side of the cube that is square but it looks like a cube.
+  m_Text: Pick one single room to visit. Usually its habitant improves in their technology
+    addiction.
 --- !u!114 &114371824869553636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,7 +320,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ToolTip Title
+  m_Text: Pay a visit to your neighbour
 --- !u!114 &114894923800768638
 MonoBehaviour:
   m_ObjectHideFlags: 1

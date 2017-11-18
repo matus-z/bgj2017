@@ -217,9 +217,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is the most awesome action tool utility skill spell procedure card
-    icon button token trigger in the welt, cause it causes casualties on both sides
-    of the side of the cube that is square but it looks like a cube.
+  m_Text: Electro Magnetic Pulse sent via console network disconnects everyone from
+    their console, but there has to be a curious one that has to get back online,
+    no matter how clean he is.
 --- !u!114 &114442072298445336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -375,7 +375,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ToolTip Title
+  m_Text: EMP
 --- !u!222 &222058447045671170
 CanvasRenderer:
   m_ObjectHideFlags: 1
