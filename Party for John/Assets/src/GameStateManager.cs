@@ -10,8 +10,6 @@ public class GameStateManager : MonoBehaviour
     [Tooltip("Length of day (turn) in sec")]
     public float DayLength;
 
-    public float NightLength = 1;
-
     [Tooltip("Count of days until game over")]
     public int DaysUntilApocalypse = 3;
 
@@ -90,13 +88,10 @@ public class GameStateManager : MonoBehaviour
     private void Update()
     {
         TimeRemaining -= Time.deltaTime;
-        if (TimeRemaining < 0)
+        if (TimeRemaining < 0 && EDayNight.Day == DayOrNight)
         {
-            switch (DayOrNight)
-            {
-                case EDayNight.Day: EndDay(); return;
-                case EDayNight.Night: EndNight(); return;
-            }
+            EndDay();
+            return;
         }
 
         if (!DayProgressTimer) return;
@@ -243,7 +238,6 @@ public class GameStateManager : MonoBehaviour
         if (isWinOrLose) return;
 
         DayOrNight = EDayNight.Night;
-        TimeRemaining = NightLength;
 
         GameplayScreen.SetActive(false);
         WinScreen.SetActive(false);
@@ -252,7 +246,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    private void EndNight()
+    public void EndNight()
     {
         if (IsGameEnd()) return;
 
