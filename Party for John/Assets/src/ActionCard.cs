@@ -30,6 +30,8 @@ public class ActionCard : MonoBehaviour
     void Start()
     {
         IsSelected = false;
+		ToolTip ttip = GetComponentInChildren<ToolTip> ();
+		ttip.On = false;
 		Cooltime = 0;
     }
 

@@ -24,6 +24,10 @@ public class ToolTip : MonoBehaviour {
 		float yVelocity = 0.0F;
 		float newPosition = Mathf.SmoothDamp(transform.position.x, targetX, ref yVelocity, smoothTime);
 		transform.position = new Vector3(newPosition,transform.position.y,0);
+		if (transform.position.x == offX)
+			transform.localScale = Vector3.zero;
+		else
+			transform.localScale = Vector3.one;
 		//transform.localScale = new Vector3 (1, 1 - transform.position.x / 14, 1);
 	}
 }
