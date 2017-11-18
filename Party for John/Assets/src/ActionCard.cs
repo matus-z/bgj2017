@@ -12,26 +12,28 @@ public class ActionCard : MonoBehaviour
     [Tooltip("Cooldown in sec")]
     public float Cooldown;
     
-    public enum EApplyTo
+    public enum EActionType
     {
-        Room,
-        Row,
-        Col,
-        Global
+        FacebookStatus,
+        PhoneCall,
+        EMP,
+        ScreamOfTruth,
+        PersonalVisit
     };
 
-    [Tooltip("Where this action should be applied to")]
-    public EApplyTo ApplyTo;
+    [Tooltip("Action type")]
+    public EActionType Type;
 
     private float Cooltime; 
     private bool IsSelected;
-
+	private ToolTip ttip;
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         IsSelected = false;
 		Cooltime = 0;
         RedrawSprite();
+		ttip = GetComponentInChildren<ToolTip> ();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -42,14 +44,15 @@ public class ActionCard : MonoBehaviour
 			GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
 
 			gsm.SelectActionCard (this);
+			ttip.On = true;
 		}
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ApplyAction(Room r)
+    public void ApplyChange(Room r, int change = 0)
     {
-        r.ImproveRoomState();
-		Cooltime = Cooldown;
+        r.ChangeRoomState(change);
+        Cooltime = Cooldown;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -70,14 +73,17 @@ public class ActionCard : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
 	public void FixedUpdate()
     {
+
         if (Cooltime > 0)
 			Cooltime -= Time.deltaTime;
 		else
 			Cooltime = 0;
 		
-		Image i = GetComponentsInChildren<Image>()[2];
+		foreach (Image i in GetComponentsInChildren<Image>()) {
+			if(i.tag == "timer")
 			i.fillAmount = Cooltime / Cooldown;
-		i = GetComponentsInChildren<Image>()[0];
-		i.color = new Color(1,1,1,IsSelected?1:0);			
+			if(i.tag == "highlight")
+			i.color = new Color (1, 1, 1, IsSelected ? 1 : 0);
+		}
 	}
 }
