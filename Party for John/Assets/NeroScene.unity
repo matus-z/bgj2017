@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -390,6 +390,11 @@ Prefab:
       propertyPath: NightScreen
       value: 
       objectReference: {fileID: 738073459}
+    - target: {fileID: 114664917679018814, guid: ea0d93a2bce5f434ba0230f66e713ef3,
+        type: 2}
+      propertyPath: DayLength
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea0d93a2bce5f434ba0230f66e713ef3, type: 2}
   m_IsPrefabParent: 0

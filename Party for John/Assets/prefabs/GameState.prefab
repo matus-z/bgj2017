@@ -65,8 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edd0ee30b4da724b8981acc9ba261e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayLength: 20
-  NightLength: 1
+  DayLength: 12
   DaysUntilApocalypse: 4
   DayProgressTimer: {fileID: 0}
   GameplayScreen: {fileID: 0}
@@ -76,6 +75,4 @@ MonoBehaviour:
   RoomsRows: 4
   RoomsCols: 4
   RoomPrefab: {fileID: 114783205949008464, guid: 785cc3f35f2960045add58db85b69cfe,
-    type: 2}
-  MessagePrefab: {fileID: 114132334000825180, guid: 0f65bf0a539d6434686e51a47a97e9da,
     type: 2}
