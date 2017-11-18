@@ -161,12 +161,14 @@ public class GameStateManager : MonoBehaviour
 
         var rPc = AllInState(Room.ERoomState.Pc);
         foreach (Room r in rPc) ActionCardSelected.ApplyChange(r, RandBool50Perc() ? - 1 : 1);
+		snd.PlaySound ("keyboard");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     public void ActionPhoneCall(Room room)
     {
         ActionCardSelected.ApplyChange(room, -1);
+		snd.PlaySound ("phone");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -179,6 +181,7 @@ public class GameStateManager : MonoBehaviour
         int ran = rng.Next(Rooms.Count);
 
         ActionCardSelected.ApplyChange(Rooms[ran], 100);
+		snd.PlaySound ("emp");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -190,12 +193,15 @@ public class GameStateManager : MonoBehaviour
         foreach (Room r in Rooms)
             if (r.Row / 2 == quadRow && r.Col / 2 == quadCol)
                 ActionCardSelected.ApplyChange(r, -100);
+
+		snd.PlaySound ("scream");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     public void ActionPersonalVisit(Room room)
     {
         ActionCardSelected.ApplyChange(room, RandBool50Perc() ? -1 : -2);
+		snd.PlaySound ("doorbell");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
