@@ -24,8 +24,9 @@ public class ActionCard : MonoBehaviour
     [Tooltip("Action type")]
     public EActionType Type;
 
-    private float Cooltime; 
+    private float Cooltime;
     private bool IsSelected;
+
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {
@@ -41,31 +42,33 @@ public class ActionCard : MonoBehaviour
 		GameObject gameState = GameObject.Find("GameState");
 		GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
 
-		if(gsm.isDay())
-			if (Cooltime <= 0) {
-				gsm.SelectActionCard (this);
-			}
+        if (!gsm.IsDay()) return;
+
+        if (Cooltime <= 0) gsm.SelectActionCard (this);
     }
-	private void OnMouseEnter(){
 
-		GameObject gameState = GameObject.Find("GameState");
-		GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
+    // ------------------------------------------------------------------------------------------------------------------
+	private void OnMouseEnter()
+    {
+        GameObject gameState = GameObject.Find("GameState");
+		GameStateManager gsm = gameState.GetComponent<GameStateManager>();
 
-		if (!gsm.isDay ()) {
-			ToolTip ttip = GetComponentInChildren<ToolTip> ();
-			if (ttip == null)
-				return;
-			ttip.On = true;
-		}
+        if (gsm.IsDay()) return;
+
+		ToolTip ttip = GetComponentInChildren<ToolTip> ();
+		if (ttip == null) return;
+
+		ttip.On = true;
 	}
 
-	private void OnMouseExit(){
-			ToolTip ttip = GetComponentInChildren<ToolTip> ();
-			if (ttip == null)
-				return;
-			ttip.On = false;
+    // ------------------------------------------------------------------------------------------------------------------
+	private void OnMouseExit()
+    {
+        ToolTip ttip = GetComponentInChildren<ToolTip> ();
+		if (ttip == null) return;
+
+		ttip.On = false;
 	}
-	
 
     // ------------------------------------------------------------------------------------------------------------------
     public void ApplyChange(Room r, int change = 0)
@@ -83,17 +86,15 @@ public class ActionCard : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
 	public void FixedUpdate()
     {
-
         if (Cooltime > 0)
 			Cooltime -= Time.deltaTime;
 		else
 			Cooltime = 0;
 		
-		foreach (Image i in GetComponentsInChildren<Image>()) {
-			if(i.tag == "timer")
-			i.fillAmount = Cooltime / Cooldown;
-			if(i.tag == "highlight")
-			i.color = new Color (1, 1, 1, IsSelected ? 1 : 0);
+		foreach (Image i in GetComponentsInChildren<Image>())
+        {
+			if(i.tag == "timer") i.fillAmount = Cooltime / Cooldown;
+			if(i.tag == "highlight") i.color = new Color (1, 1, 1, IsSelected ? 1 : 0);
 		}
 	}
 }

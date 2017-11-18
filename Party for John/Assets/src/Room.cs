@@ -37,7 +37,6 @@ public class Room : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
 	public void Rotate(int angle)
     {
-
         frgrender = GetComponentsInChildren<SpriteRenderer> () [2];
 		frgrender.transform.Rotate (new Vector3 (0, 0, angle));
 	}

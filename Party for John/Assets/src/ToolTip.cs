@@ -9,25 +9,25 @@ public class ToolTip : MonoBehaviour {
 	public float offX;
 	private float targetX;
 
-	// Use this for initialization
-	void Start () {
-		onX = transform.position.x;
+    // ------------------------------------------------------------------------------------------------------------------
+	void Start ()
+    {
+        onX = transform.position.x;
 		offX = 10f;
 		targetX = offX;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
+    // ------------------------------------------------------------------------------------------------------------------
+	void Update ()
+    {
 		targetX = On ? onX : offX;
 		float smoothTime = 0.01F;
 		float yVelocity = 0.0F;
 		float newPosition = Mathf.SmoothDamp(transform.position.x, targetX, ref yVelocity, smoothTime);
-		transform.position = new Vector3(newPosition,transform.position.y,0);
-		if (transform.position.x == offX)
-			transform.localScale = Vector3.zero;
-		else
-			transform.localScale = Vector3.one;
-		//transform.localScale = new Vector3 (1, 1 - transform.position.x / 14, 1);
+		transform.position = new Vector3(newPosition,transform.position.y, 0);
+
+	    transform.localScale = (transform.position.x == offX)
+            ? Vector3.zero
+			: transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
 	}
 }

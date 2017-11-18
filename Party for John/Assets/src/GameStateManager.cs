@@ -25,7 +25,6 @@ public class GameStateManager : MonoBehaviour
     private float TimeRemaining;
     private int DaysRemaining;
 
-
     public ActionCard ActionCardSelected { get; private set; }
 
     public int RoomsRows = 4;
@@ -61,8 +60,6 @@ public class GameStateManager : MonoBehaviour
 		snd = GameObject.Find ("AudioManager").GetComponent <SoundManager> ();
 
         System.Random rng = new System.Random();
-        int rotation;
-
         for (int row = 0; row < RoomsRows; row++)
         {
             for (int col = 0; col < RoomsRows; col++)
@@ -76,7 +73,7 @@ public class GameStateManager : MonoBehaviour
                 room.Row = row;
                 room.Col = col;
 				room.transform.SetParent(transform.parent);
-                rotation = -90 * rng.Next(2);
+                int rotation = -90 * rng.Next(2);
                 room.Rotate(rotation);
                 Rooms.Add(room);
             }
@@ -102,8 +99,10 @@ public class GameStateManager : MonoBehaviour
         img.fillAmount = TimeRemaining / DayLength;
     }
 
-	public bool isDay(){
-		return (DayOrNight == EDayNight.Day);
+    // ------------------------------------------------------------------------------------------------------------------
+	public bool IsDay()
+    {
+        return (DayOrNight == EDayNight.Day);
 	}
 
     // ------------------------------------------------------------------------------------------------------------------
