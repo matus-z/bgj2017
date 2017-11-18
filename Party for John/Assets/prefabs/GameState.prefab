@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4005849100160744}
   - component: {fileID: 114664917679018814}
+  - component: {fileID: 114523061088025142}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -33,13 +34,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1876903696496522}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114523061088025142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876903696496522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd7a7d4343be8042a9a29504523a1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeDuration: 0.5
+  ShakeAmount: 0.1
 --- !u!114 &114664917679018814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edd0ee30b4da724b8981acc9ba261e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayLength: 15
+  DayLength: 400
   NightLength: 1
   DaysUntilApocalypse: 4
   DayProgressTimer: {fileID: 0}
@@ -62,4 +76,6 @@ MonoBehaviour:
   RoomsRows: 4
   RoomsCols: 4
   RoomPrefab: {fileID: 114783205949008464, guid: 785cc3f35f2960045add58db85b69cfe,
+    type: 2}
+  MessagePrefab: {fileID: 114132334000825180, guid: 0f65bf0a539d6434686e51a47a97e9da,
     type: 2}

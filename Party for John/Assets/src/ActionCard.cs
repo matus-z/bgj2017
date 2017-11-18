@@ -27,12 +27,12 @@ public class ActionCard : MonoBehaviour
     private float Cooltime; 
     private bool IsSelected;
 	private ToolTip ttip;
+
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         IsSelected = false;
 		Cooltime = 0;
-        RedrawSprite();
 		ttip = GetComponentInChildren<ToolTip> ();
     }
 
@@ -40,7 +40,7 @@ public class ActionCard : MonoBehaviour
     private void OnMouseDown()
     {
 		if (Cooltime <= 0) {
-			GameObject gameState = GameObject.Find("World");
+			GameObject gameState = GameObject.Find("GameState");
 			GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
 
 			gsm.SelectActionCard (this);
@@ -53,6 +53,8 @@ public class ActionCard : MonoBehaviour
     {
         r.ChangeRoomState(change);
         Cooltime = Cooldown;
+    }
+
     // ------------------------------------------------------------------------------------------------------------------
     public void SetSelected(bool selected)
     {
@@ -74,21 +76,5 @@ public class ActionCard : MonoBehaviour
 			if(i.tag == "highlight")
 			i.color = new Color (1, 1, 1, IsSelected ? 1 : 0);
 		}
-	}
-}
-    }
-
-    // ------------------------------------------------------------------------------------------------------------------
-	public void FixedUpdate()
-    {
-        if (Cooltime > 0)
-			Cooltime -= Time.deltaTime;
-		else
-			Cooltime = 0;
-		
-		Image i = GetComponentsInChildren<Image>()[2];
-	    i.fillAmount = Cooltime / Cooldown;
-		i = GetComponentsInChildren<Image>()[0];
-		i.color = new Color(1,1,1,IsSelected?1:0);			
 	}
 }
