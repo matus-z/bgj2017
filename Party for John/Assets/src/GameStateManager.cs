@@ -30,7 +30,6 @@ public class GameStateManager : MonoBehaviour
     public int RoomsCols = 4;
 
     public Room RoomPrefab;
-    public TopMessage MessagePrefab;
 
     private List<Room> Rooms;
 
@@ -330,23 +329,5 @@ public class GameStateManager : MonoBehaviour
     {
         snd.PlaySound("error");
         GetComponent<ScreenShake>().StartNow();
-
-        DisplayMessage("meh");
-    }
-
-    // ------------------------------------------------------------------------------------------------------------------
-    private void DisplayMessage(string text)
-    {
-        Vector3 pos = new Vector3(0, -2, 1);
-        TopMessage msg = Instantiate(MessagePrefab, pos, Quaternion.identity);
-
-        StartCoroutine(DestroyAfter(msg.gameObject));
-    }
-
-    // ------------------------------------------------------------------------------------------------------------------
-    private IEnumerator DestroyAfter(GameObject toDestroy)
-    {
-        yield return new WaitForSeconds(2.0f);
-        Destroy(toDestroy);
     }
 }
