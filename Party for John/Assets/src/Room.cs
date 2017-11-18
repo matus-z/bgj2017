@@ -21,7 +21,7 @@ public class Room : MonoBehaviour
 
 	public Sprite[] Bcg;
 	public Sprite[] Frg;
-	private int rotation;
+
 	private SpriteRenderer bcgrender;
 	private SpriteRenderer frgrender;
 
@@ -30,13 +30,15 @@ public class Room : MonoBehaviour
     {
         RoomState = ERoomState.HeadGear;
 		bcgrender = GetComponentsInChildren<SpriteRenderer> ()[1];
-		frgrender = GetComponentsInChildren<SpriteRenderer> () [2];
+		frgrender = GetComponentsInChildren<SpriteRenderer> ()[2];
         RedrawSprite();
     }
 
-	public void Rotate(int angle){
+    // ------------------------------------------------------------------------------------------------------------------
+	public void Rotate(int angle)
+    {
 
-		frgrender = GetComponentsInChildren<SpriteRenderer> () [2];
+        frgrender = GetComponentsInChildren<SpriteRenderer> () [2];
 		frgrender.transform.Rotate (new Vector3 (0, 0, angle));
 	}
 
