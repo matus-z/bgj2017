@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(ScreenShake))]
 public class GameStateManager : MonoBehaviour
 {
     [Tooltip("Length of day (turn) in sec")]
@@ -329,5 +330,6 @@ public class GameStateManager : MonoBehaviour
     private void ClickOnIncorrectRoom()
     {
         snd.PlaySound("error");
+        GetComponent<ScreenShake>().StartNow();
     }
 }

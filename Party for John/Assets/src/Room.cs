@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     void OnMouseDown()
     {
-        GameObject gameState = GameObject.Find("GameState");
+        GameObject gameState = GameObject.Find("World");
         GameStateManager gsm = gameState.GetComponent<GameStateManager>();
 
         gsm.SelectRoom(this);

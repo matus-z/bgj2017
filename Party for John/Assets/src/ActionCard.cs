@@ -38,7 +38,7 @@ public class ActionCard : MonoBehaviour
     private void OnMouseDown()
     {
 		if (Cooltime <= 0) {
-			GameObject gameState = GameObject.Find ("GameState");
+			GameObject gameState = GameObject.Find("World");
 			GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
 
 			gsm.SelectActionCard (this);
