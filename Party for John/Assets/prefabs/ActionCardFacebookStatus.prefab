@@ -259,9 +259,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is the most awesome action tool utility skill spell procedure card
-    icon button token trigger in the welt, cause it causes casualties on both sides
-    of the side of the cube that is square but it looks like a cube.
+  m_Text: Put up a status on Facebook, saying that Facebook is a lie. There are some
+    who believe your status and drop their phones, but there are few that say no way
+    and dive deeper to console level
 --- !u!114 &114483150323115754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -375,7 +375,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ToolTip Title
+  m_Text: Facebook status
 --- !u!222 &222035210801678300
 CanvasRenderer:
   m_ObjectHideFlags: 1

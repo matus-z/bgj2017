@@ -203,7 +203,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ToolTip Title
+  m_Text: scream of truth
 --- !u!114 &114037672725283854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,9 +236,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is the most awesome action tool utility skill spell procedure card
-    icon button token trigger in the welt, cause it causes casualties on both sides
-    of the side of the cube that is square but it looks like a cube.
+  m_Text: 'Pick an already woken habitant that will scream about joys of offline life
+    in his room, to completely wake all his neighbours
+
+'
 --- !u!114 &114391083824839560
 MonoBehaviour:
   m_ObjectHideFlags: 1
