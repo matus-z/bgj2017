@@ -69,14 +69,14 @@ public class GameStateManager : MonoBehaviour
             for (int col = 0; col < RoomsRows; col++)
             {
                 Vector3 pos = new Vector3(
-                    -1.75f + row + ((row >= RoomsRows / 2) ? 0.3f : 0),
-                    -1.75f + col + ((col >= RoomsCols / 2) ? 0.3f : 0),
+                    -1.75f + row + ((row >= RoomsRows / 2) ? 0.5f : 0),
+                    -1.75f + col + ((col >= RoomsCols / 2) ? 0.5f : 0),
                     1);
 
                 Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
                 room.Row = row;
                 room.Col = col;
-                room.transform.parent = GameplayScreen.transform;
+				room.transform.SetParent(transform.parent);
                 rotation = -90 * rng.Next(2);
                 room.Rotate(rotation);
                 Rooms.Add(room);
