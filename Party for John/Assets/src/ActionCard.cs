@@ -26,27 +26,44 @@ public class ActionCard : MonoBehaviour
 
     private float Cooltime; 
     private bool IsSelected;
-	private ToolTip ttip;
-
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
     {
         IsSelected = false;
 		Cooltime = 0;
-		ttip = GetComponentInChildren<ToolTip> ();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     private void OnMouseDown()
     {
-		if (Cooltime <= 0) {
-			GameObject gameState = GameObject.Find("GameState");
-			GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
+		GameObject gameState = GameObject.Find("GameState");
+		GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
 
-			gsm.SelectActionCard (this);
-			//ttip.On = true;
-		}
+		if(gsm.isDay())
+			if (Cooltime <= 0) {
+				gsm.SelectActionCard (this);
+			}
     }
+	private void OnMouseEnter(){
+
+		GameObject gameState = GameObject.Find("GameState");
+		GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
+
+		if (!gsm.isDay ()) {
+			ToolTip ttip = GetComponentInChildren<ToolTip> ();
+			if (ttip == null)
+				return;
+			ttip.On = true;
+		}
+	}
+
+	private void OnMouseExit(){
+			ToolTip ttip = GetComponentInChildren<ToolTip> ();
+			if (ttip == null)
+				return;
+			ttip.On = false;
+	}
+	
 
     // ------------------------------------------------------------------------------------------------------------------
     public void ApplyChange(Room r, int change = 0)
