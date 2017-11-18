@@ -94,6 +94,8 @@ MonoBehaviour:
   RoomsCols: 4
   RoomPrefab: {fileID: 114783205949008464, guid: 785cc3f35f2960045add58db85b69cfe,
     type: 2}
+  MessagePrefab: {fileID: 114132334000825180, guid: 0f65bf0a539d6434686e51a47a97e9da,
+    type: 2}
 --- !u!114 &114650416843227834
 MonoBehaviour:
   m_ObjectHideFlags: 1
