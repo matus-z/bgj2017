@@ -44,7 +44,7 @@ public class ActionCard : MonoBehaviour
 			GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
 
 			gsm.SelectActionCard (this);
-			ttip.On = true;
+			//ttip.On = true;
 		}
     }
 
