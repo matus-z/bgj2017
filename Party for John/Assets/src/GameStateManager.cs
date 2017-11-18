@@ -122,22 +122,39 @@ public class GameStateManager : MonoBehaviour
         if (!room) return;
         if (!ActionCardSelected) return;
 
+        bool isWrongRoom = true;
         switch (ActionCardSelected.Type)
         {
-            case ActionCard.EActionType.FacebookStatus: ActionFacebookStatus(); break;
-            case ActionCard.EActionType.PhoneCall: ActionPhoneCall(); break;
-            case ActionCard.EActionType.EMP: ActionEMP(); break;
-            case ActionCard.EActionType.ScreamOfTruth: ActionScreamOfTruth(); break;
-            case ActionCard.EActionType.PersonalVisit: ActionPersonalVisit(); break;
+            case ActionCard.EActionType.FacebookStatus: isWrongRoom = (room.RoomState != Room.ERoomState.Pc && room.RoomState != Room.ERoomState.Phone); break;
+            case ActionCard.EActionType.PhoneCall: isWrongRoom = (room.RoomState != Room.ERoomState.Phone); break;
+            case ActionCard.EActionType.EMP: isWrongRoom = (room.RoomState != Room.ERoomState.HeadGear); break;
+            case ActionCard.EActionType.ScreamOfTruth: isWrongRoom = (room.RoomState != Room.ERoomState.Clean); break;
+            case ActionCard.EActionType.PersonalVisit: isWrongRoom = false; break;
         }
-        
+
+        if (isWrongRoom)
+        {
+            ClickOnIncorrectRoom();
+        }
+        else
+        {
+            switch (ActionCardSelected.Type)
+            {
+                case ActionCard.EActionType.FacebookStatus: ActionFacebookStatus(room); break;
+                case ActionCard.EActionType.PhoneCall: ActionPhoneCall(room); break;
+                case ActionCard.EActionType.EMP: ActionEMP(room); break;
+                case ActionCard.EActionType.ScreamOfTruth: ActionScreamOfTruth(room); break;
+                case ActionCard.EActionType.PersonalVisit: ActionPersonalVisit(room); break;
+            }
+        }
+
         ActionCardSelected.SetSelected(false);
         ActionCardSelected = null;
         SolveWin();
     }
     
     // ------------------------------------------------------------------------------------------------------------------
-    public void ActionFacebookStatus()
+    public void ActionFacebookStatus(Room room)
     {
         var rPhone = AllInState(Room.ERoomState.Phone);
         foreach (Room r in rPhone) ActionCardSelected.ApplyChange(r, -1);
@@ -147,28 +164,38 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ActionPhoneCall()
+    public void ActionPhoneCall(Room room)
     {
-        // TODO
+        ActionCardSelected.ApplyChange(room, -1);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ActionEMP()
+    public void ActionEMP(Room room)
     {
         var rHg = AllInState(Room.ERoomState.HeadGear);
         foreach (Room r in rHg) ActionCardSelected.ApplyChange(r, RandBool50Perc() ? -1 : -2);
+
+        System.Random rng = new System.Random();
+        int ran = rng.Next(Rooms.Count);
+
+        ActionCardSelected.ApplyChange(Rooms[ran], 100);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ActionScreamOfTruth()
+    public void ActionScreamOfTruth(Room room)
     {
-        // TODO
+        int quadRow = room.Row / 2;
+        int quadCol = room.Col / 2;
+
+        foreach (Room r in Rooms)
+            if (r.Row / 2 == quadRow && r.Col / 2 == quadCol)
+                ActionCardSelected.ApplyChange(r, -100);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    public void ActionPersonalVisit()
+    public void ActionPersonalVisit(Room room)
     {
-        // TODO
+        ActionCardSelected.ApplyChange(room, RandBool50Perc() ? -1 : -2);
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -289,7 +316,12 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private bool RandBool50Perc()
     {
-        System.Random rng = new System.Random();
-        return rng.Next(2) >= 1;
+        return UnityEngine.Random.value >= 0.5f;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------
+    private void ClickOnIncorrectRoom()
+    {
+        snd.PlaySound("error");
     }
 }
