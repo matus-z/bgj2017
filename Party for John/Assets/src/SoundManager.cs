@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
 	private Dictionary<string, AudioClip> soundBank = new Dictionary<string, AudioClip>();
 
     // ------------------------------------------------------------------------------------------------------------------
-    void Start ()
+    private void Start ()
     {
 		this.audio = GetComponents<AudioSource> ()[1];
 		this.soundBank.Add ("click", click);

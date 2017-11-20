@@ -10,15 +10,15 @@ public class ToolTip : MonoBehaviour
 	private float targetX;
 
     // ------------------------------------------------------------------------------------------------------------------
-	void Start ()
+    private void Start ()
     {
         onX = transform.position.x;
 		offX = 10f;
 		targetX = offX;
 	}
-	
+
     // ------------------------------------------------------------------------------------------------------------------
-	void Update ()
+    private void Update ()
     {
 		targetX = On ? onX : offX;
 		float smoothTime = 0.01F;

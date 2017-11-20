@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour
 	public AudioClip music;
 
     // ------------------------------------------------------------------------------------------------------------------
-    void Start()
+    private void Start()
     {
 		AudioSource audio = GetComponents<AudioSource> ()[0];
 		audio.clip = music;

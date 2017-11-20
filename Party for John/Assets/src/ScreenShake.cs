@@ -11,7 +11,7 @@ public class ScreenShake : MonoBehaviour
     private float ShakeProgress = 0f;
 
     // ------------------------------------------------------------------------------------------------------------------
-    void OnEnable()
+    private void OnEnable()
     {
         OriginalPos = Camera.main.transform.localPosition;
     }
@@ -23,7 +23,7 @@ public class ScreenShake : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    void Update()
+    private void Update()
     {
         if (ShakeProgress > 0)
         {
