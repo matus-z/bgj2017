@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToolTip : MonoBehaviour {
-
+public class ToolTip : MonoBehaviour
+{
 	public bool On;
 	public float onX;
 	public float offX;
