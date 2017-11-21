@@ -28,7 +28,7 @@ public class ActionCard : MonoBehaviour
     private bool IsSelected;
 
     // ------------------------------------------------------------------------------------------------------------------
-    void Start()
+    private void Start()
     {
         IsSelected = false;
 		ToolTip ttip = GetComponentInChildren<ToolTip> ();

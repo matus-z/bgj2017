@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class WinLose : MonoBehaviour
 {
     // ------------------------------------------------------------------------------------------------------------------
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
