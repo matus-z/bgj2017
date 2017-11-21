@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(AudioSource))]
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
 	public AudioClip click;
 	public AudioClip error;
