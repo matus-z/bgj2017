@@ -21,9 +21,11 @@ public class Room : MonoBehaviour
 
 	public Sprite[] Bcg;
 	public Sprite[] Frg;
-
 	private SpriteRenderer bcgrender;
 	private SpriteRenderer frgrender;
+	private SpriteRenderer transrender;
+	private float trans = 1.0f;//transition effect
+	public float transTime = 1.0f; 
 
     // ------------------------------------------------------------------------------------------------------------------
     void Start()
@@ -31,6 +33,7 @@ public class Room : MonoBehaviour
         RoomState = ERoomState.HeadGear;
 		bcgrender = GetComponentsInChildren<SpriteRenderer> ()[1];
 		frgrender = GetComponentsInChildren<SpriteRenderer> ()[2];
+		transrender = GetComponentsInChildren<SpriteRenderer> ()[3];
         RedrawSprite();
     }
 
@@ -54,10 +57,9 @@ public class Room : MonoBehaviour
     public void ChangeRoomState(int change)
     {
         int rsNum = (int) RoomState + change;
-
         if (rsNum < 0) rsNum = 0;
         if (rsNum > 3) rsNum = 3;
-
+		trans = 1.0f;
         RoomState = (ERoomState) rsNum;
         RedrawSprite();
     }
@@ -68,4 +70,13 @@ public class Room : MonoBehaviour
 		bcgrender.sprite = Bcg[(int)RoomState];
 		frgrender.sprite = Frg [(int)RoomState];
     }
+
+	private void FixedUpdate(){
+
+		if (trans > 0.0f) {
+			trans -= Time.deltaTime / transTime;
+			transrender.color = new Color (1, 1, 1, trans);
+		}
+		RedrawSprite ();
+	}
 }

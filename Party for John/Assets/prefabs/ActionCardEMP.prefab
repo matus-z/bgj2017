@@ -217,9 +217,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Electro Magnetic Pulse sent via console network disconnects everyone from
-    their console, but there has to be a curious one that has to get back online,
-    no matter how clean he is.
+  m_Text: Electro Magnetic Pulse disconnects everyone from console, but curiosity
+    brings one random habitant back to console level.
 --- !u!114 &114442072298445336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,6 +315,8 @@ MonoBehaviour:
   BcgUnselected: {fileID: 21300000, guid: 79a49cfb449a11f44a3a454cc023ec3b, type: 3}
   Cooldown: 5
   Type: 2
+  ShakeDuration: 0.5
+  ShakeAmount: 0.1
 --- !u!114 &114808357883649100
 MonoBehaviour:
   m_ObjectHideFlags: 1

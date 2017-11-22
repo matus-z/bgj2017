@@ -51,9 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Background.cs" />
      <Compile Include="Assets\src\ActionCard.cs" />
+     <Compile Include="Assets\src\Background.cs" />
      <Compile Include="Assets\src\GameStateManager.cs" />
+     <Compile Include="Assets\src\infoScroll.cs" />
+     <Compile Include="Assets\src\introScroll.cs" />
      <Compile Include="Assets\src\MusicManager.cs" />
      <Compile Include="Assets\src\NightScreen.cs" />
      <Compile Include="Assets\src\Room.cs" />

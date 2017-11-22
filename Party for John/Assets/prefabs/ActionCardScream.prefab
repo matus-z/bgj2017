@@ -236,8 +236,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Pick an already woken habitant that will scream about joys of offline life
-    in his room, to completely wake all his neighbours
+  m_Text: 'Pick one already free habitant to scream about joys of offline life in
+    his room, to completely free all his neighbours.
 
 '
 --- !u!114 &114391083824839560
@@ -377,6 +377,8 @@ MonoBehaviour:
   BcgUnselected: {fileID: 21300000, guid: 79a49cfb449a11f44a3a454cc023ec3b, type: 3}
   Cooldown: 8
   Type: 3
+  ShakeDuration: 0.5
+  ShakeAmount: 0.1
 --- !u!222 &222178705907048144
 CanvasRenderer:
   m_ObjectHideFlags: 1
