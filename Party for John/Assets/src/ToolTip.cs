@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToolTip : MonoBehaviour {
-
+public class ToolTip : MonoBehaviour
+{
 	public bool On;
 	public float onX;
 	public float offX;
 	private float targetX;
 
     // ------------------------------------------------------------------------------------------------------------------
-	void Start ()
+    private void Start ()
     {
         onX = transform.position.x;
 		offX = 10f;
 		targetX = offX;
 	}
-	
+
     // ------------------------------------------------------------------------------------------------------------------
-	void Update ()
+    private void Update ()
     {
 		targetX = On ? onX : offX;
 		float smoothTime = 0.01F;

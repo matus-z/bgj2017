@@ -28,7 +28,7 @@ public class Room : MonoBehaviour
 	public float transTime = 1.0f; 
 
     // ------------------------------------------------------------------------------------------------------------------
-    void Start()
+    private void Start()
     {
         RoomState = ERoomState.HeadGear;
 		bcgrender = GetComponentsInChildren<SpriteRenderer> ()[1];
@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
 	}
 
     // ------------------------------------------------------------------------------------------------------------------
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         GameObject gameState = GameObject.Find("GameState");
         GameStateManager gsm = gameState.GetComponent<GameStateManager>();

@@ -22,23 +22,20 @@ public class GameStateManager : MonoBehaviour
     public GameObject NightScreen;
 	public GameObject backObject;
 
+    public Room RoomPrefab;
+
+    [Tooltip("Rows in the grid")]
+    public int RoomsRows = 4;
+
+    [Tooltip("Cols in the grid")]
+    public int RoomsCols = 4;
+
     private float TimeRemaining;
     private int DaysRemaining;
 
     public ActionCard ActionCardSelected { get; private set; }
 
-    public int RoomsRows = 4;
-    public int RoomsCols = 4;
-
-    public Room RoomPrefab;
-
     private List<Room> Rooms;
-
-    private enum EState
-    {
-        SelectActionCard,
-        SelectRoom
-    }
 
     private enum EDayNight
     {
@@ -109,11 +106,7 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectActionCard(ActionCard actionCard)
     {
-		if (ActionCardSelected != null) {
-			ActionCardSelected.SetSelected (false);
-			ActionCardSelected = null;
-		}
-        
+        if (ActionCardSelected) ActionCardSelected.SetSelected(false);
         if (!actionCard) return;
 
         ActionCardSelected = actionCard;
@@ -124,7 +117,7 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectRoom(Room room)
     {
-        if (GetState() != EState.SelectRoom) return;
+        if (!ActionCardSelected) return;
         if (!room) return;
         if (!ActionCardSelected) return;
 
@@ -210,12 +203,6 @@ public class GameStateManager : MonoBehaviour
     {
         ActionCardSelected.ApplyChange(room, RandBool(0.2f) ? 0 : -1);
 		snd.PlaySound ("doorbell");
-    }
-
-    // ------------------------------------------------------------------------------------------------------------------
-    private EState GetState()
-    {
-        return ActionCardSelected ? EState.SelectRoom : EState.SelectActionCard;
     }
 
     // ------------------------------------------------------------------------------------------------------------------

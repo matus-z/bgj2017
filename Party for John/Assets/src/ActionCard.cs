@@ -47,7 +47,6 @@ public class ActionCard : MonoBehaviour
 	{
 		ShakeProgress = ShakeDuration;
 	}
-
 	// ------------------------------------------------------------------------------------------------------------------
 	private void OnMouseDown ()
 	{
@@ -86,7 +85,6 @@ public class ActionCard : MonoBehaviour
 
 		ttip.On = false;
 	}
-
 	// ------------------------------------------------------------------------------------------------------------------
 	public void ApplyChange (Room r, int change = 0)
 	{
@@ -128,6 +126,7 @@ public class ActionCard : MonoBehaviour
 				i.fillAmount = Cooltime / Cooldown;
 			if (i.tag == "highlight")
 				i.color = new Color (1, 1, 1, IsSelected ? 1 : 0);
+
 		}
 	}
 }
