@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class infoScroll : MonoBehaviour
 {
-
 	public GameObject[] pages;
 	public GameObject[]txt;
 	public GameObject nextPanel;

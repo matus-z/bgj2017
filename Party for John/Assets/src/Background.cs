@@ -6,19 +6,25 @@ public class Background : MonoBehaviour
 {
 	public Sprite day;
 	public Sprite night;
-public Color c_day;
+    public Color c_day;
 	public Color c_night;
 	public SpriteRenderer back;
-	// Use this for initialization
-	void Start () {
-		
-	}
 
-	public void SetSprite(bool isDay){
-SpriteRenderer spr = GetComponent<SpriteRenderer> ();
-		if (spr != null) {
-			spr.sprite = isDay ? day : night;
-			back.color = isDay ? c_day : c_night;
-		}
-	}
+	public void SetSprite(GameStateManager.EDayNight dayOrNight)
+    {
+        SpriteRenderer spr = GetComponent<SpriteRenderer> ();
+        if (spr == null) return;
+
+        switch(dayOrNight)
+        {
+            case GameStateManager.EDayNight.Day:
+                spr.sprite = day;
+                back.color = c_day;
+                break;
+            case GameStateManager.EDayNight.Night:
+                spr.sprite = night;
+                back.color = c_night;
+                break;
+        }
+    }
 }

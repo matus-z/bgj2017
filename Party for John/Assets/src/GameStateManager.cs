@@ -37,7 +37,7 @@ public class GameStateManager : MonoBehaviour
 
     private List<Room> Rooms;
 
-    private enum EDayNight
+    public enum EDayNight
     {
         Day,
         Night
@@ -150,8 +150,6 @@ public class GameStateManager : MonoBehaviour
 			ActionCardSelected = null;
 			SolveWin();
         }
-
-        
     }
     
     // ------------------------------------------------------------------------------------------------------------------
@@ -208,11 +206,15 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private bool IsGameEnd()
     {
+        if (Rooms == null) return false;
+
         return Rooms.Count == 0;
     }
 
-	private void SetActive(){
-		this.SetActive ();
+    // ------------------------------------------------------------------------------------------------------------------
+    private void SetActive()
+    {
+        this.SetActive ();
 		GameplayScreen.SetActive (true);
 		WinScreen.SetActive(false);
 		LoseScreen.SetActive(false);
@@ -227,7 +229,6 @@ public class GameStateManager : MonoBehaviour
         DaysRemaining--;
         UpdateDaysRemainingText();
 		Background bg = backObject.GetComponent<Background> ();
-		bg.SetSprite (false);
 
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
 
@@ -235,7 +236,7 @@ public class GameStateManager : MonoBehaviour
 
         System.Random rnd = new System.Random();
         int roomsToDarken = 10;
-        while (roomsToDarken > 0)
+        while (roomsToDarken > 0 && Rooms != null)
         {
             int r = rnd.Next(Rooms.Count);
             Rooms[r].ChangeRoomState(1);
@@ -246,6 +247,7 @@ public class GameStateManager : MonoBehaviour
         if (isWinOrLose) return;
 
         DayOrNight = EDayNight.Night;
+        bg.SetSprite(DayOrNight);
 
         //GameplayScreen.SetActive(false);
         WinScreen.SetActive(false);
@@ -259,9 +261,10 @@ public class GameStateManager : MonoBehaviour
         if (IsGameEnd()) return;
 
 		Background bg = backObject.GetComponent<Background> ();
-		bg.SetSprite (true);
 
         DayOrNight = EDayNight.Day;
+        bg.SetSprite(DayOrNight);
+
         TimeRemaining = DayLength;
 
         //GameplayScreen.SetActive(true);
@@ -292,6 +295,8 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private bool SolveLose()
     {
+        if (Rooms == null) return false;
+
         var rHg = AllInState(Room.ERoomState.HeadGear);
         if (rHg.Count == Rooms.Count || DaysRemaining < 0)
         {
@@ -323,6 +328,8 @@ public class GameStateManager : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private List<Room> AllInState(Room.ERoomState rs)
     {
+        if (Rooms == null) return new List<Room>();
+
         return Rooms.Where(room => room.RoomState == rs).ToList();
     }
 
