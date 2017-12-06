@@ -20,7 +20,7 @@ public class GameStateManager : MonoBehaviour
     public GameObject WinScreen;
     public GameObject LoseScreen;
     public GameObject NightScreen;
-	public GameObject backObject;
+    public GameObject backObject;
 
     public Room RoomPrefab;
 
@@ -37,29 +37,32 @@ public class GameStateManager : MonoBehaviour
 
     private List<Room> Rooms;
 
-    public enum EDayNight
+    public enum EGameState
     {
+        Intro,
         Day,
         Night
     }
 
-    private EDayNight DayOrNight = EDayNight.Day;
+    private EGameState GameState = EGameState.Intro;
 
-	private SoundManager snd;
+    private SoundManager Snd;
 
     // ------------------------------------------------------------------------------------------------------------------
     public void StartGame()
     {
         TimeRemaining = DayLength;
         DaysRemaining = DaysUntilApocalypse;
-		GameplayScreen.SetActive (true);
+
+        GameplayScreen.SetActive(true);
         Rooms = new List<Room>();
-		snd = GameObject.Find ("AudioManager").GetComponent <SoundManager> ();
+
+        Snd = GameObject.Find("AudioManager").GetComponent<SoundManager>();
 
         System.Random rng = new System.Random();
         for (int row = 0; row < RoomsRows; row++)
         {
-            for (int col = 0; col < RoomsRows; col++)
+            for (int col = 0; col < RoomsCols; col++)
             {
                 Vector3 pos = new Vector3(
                     -1.75f + row + ((row >= RoomsRows / 2) ? 0.5f : 0),
@@ -69,7 +72,7 @@ public class GameStateManager : MonoBehaviour
                 Room room = Instantiate(RoomPrefab, pos, Quaternion.identity);
                 room.Row = row;
                 room.Col = col;
-				room.transform.SetParent(transform.parent);
+                room.transform.SetParent(transform.parent);
                 int rotation = -90 * rng.Next(2);
                 room.Rotate(rotation);
                 Rooms.Add(room);
@@ -77,13 +80,22 @@ public class GameStateManager : MonoBehaviour
         }
 
         UpdateDaysRemainingText();
+
+        GameState = EGameState.Day;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     private void Update()
     {
+        if (EGameState.Intro == GameState)
+        {
+            DaysRemaining = DaysUntilApocalypse;
+            UpdateDaysRemainingText();
+            return;
+        }
+
         TimeRemaining -= Time.deltaTime;
-        if (TimeRemaining < 0 && EDayNight.Day == DayOrNight)
+        if (TimeRemaining < 0 && EGameState.Day == GameState)
         {
             EndDay();
             return;
@@ -94,14 +106,14 @@ public class GameStateManager : MonoBehaviour
         if (!img) return;
 
         img.fillAmount = TimeRemaining / DayLength;
-		UpdateDaysRemainingText();
+        UpdateDaysRemainingText();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-	public bool IsDay()
+    public bool IsDay()
     {
-        return (DayOrNight == EDayNight.Day);
-	}
+        return (GameState == EGameState.Day);
+    }
 
     // ------------------------------------------------------------------------------------------------------------------
     public void SelectActionCard(ActionCard actionCard)
@@ -111,7 +123,7 @@ public class GameStateManager : MonoBehaviour
 
         ActionCardSelected = actionCard;
         ActionCardSelected.SetSelected(true);
-		snd.PlaySound ("click");
+        Snd.PlaySound("click");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -128,7 +140,7 @@ public class GameStateManager : MonoBehaviour
             case ActionCard.EActionType.PhoneCall: isWrongRoom = (room.RoomState != Room.ERoomState.Phone); break;
             case ActionCard.EActionType.EMP: isWrongRoom = (room.RoomState != Room.ERoomState.HeadGear); break;
             case ActionCard.EActionType.ScreamOfTruth: isWrongRoom = (room.RoomState != Room.ERoomState.Clean); break;
-		case ActionCard.EActionType.PersonalVisit: isWrongRoom = false; break;
+            case ActionCard.EActionType.PersonalVisit: isWrongRoom = false; break;
         }
 
         if (isWrongRoom)
@@ -146,12 +158,12 @@ public class GameStateManager : MonoBehaviour
                 case ActionCard.EActionType.PersonalVisit: ActionPersonalVisit(room); break;
             }
 
-			ActionCardSelected.SetSelected(false);
-			ActionCardSelected = null;
-			SolveWin();
+            ActionCardSelected.SetSelected(false);
+            ActionCardSelected = null;
+            SolveWin();
         }
     }
-    
+
     // ------------------------------------------------------------------------------------------------------------------
     public void ActionFacebookStatus(Room room)
     {
@@ -159,15 +171,15 @@ public class GameStateManager : MonoBehaviour
         foreach (Room r in rPhone) ActionCardSelected.ApplyChange(r, -1);
 
         var rPc = AllInState(Room.ERoomState.Pc);
-        foreach (Room r in rPc) ActionCardSelected.ApplyChange(r, RandBool(0.5f) ? - 1 : 1);
-		snd.PlaySound ("keyboard");
+        foreach (Room r in rPc) ActionCardSelected.ApplyChange(r, RandBool(0.5f) ? -1 : 1);
+        Snd.PlaySound("keyboard");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     public void ActionPhoneCall(Room room)
     {
         ActionCardSelected.ApplyChange(room, -1);
-		snd.PlaySound ("phone");
+        Snd.PlaySound("phone");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -180,7 +192,7 @@ public class GameStateManager : MonoBehaviour
         int ran = rng.Next(Rooms.Count);
 
         ActionCardSelected.ApplyChange(Rooms[ran], 100);
-		snd.PlaySound ("emp");
+        Snd.PlaySound("emp");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -193,14 +205,14 @@ public class GameStateManager : MonoBehaviour
             if (r.Row / 2 == quadRow && r.Col / 2 == quadCol)
                 ActionCardSelected.ApplyChange(r, -100);
 
-		snd.PlaySound ("scream");
+        Snd.PlaySound("scream");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     public void ActionPersonalVisit(Room room)
     {
         ActionCardSelected.ApplyChange(room, RandBool(0.2f) ? 0 : -1);
-		snd.PlaySound ("doorbell");
+        Snd.PlaySound("doorbell");
     }
 
     // ------------------------------------------------------------------------------------------------------------------
@@ -212,23 +224,13 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-    private void SetActive()
-    {
-        this.SetActive ();
-		GameplayScreen.SetActive (true);
-		WinScreen.SetActive(false);
-		LoseScreen.SetActive(false);
-		NightScreen.SetActive(true);
-	}
-
-    // ------------------------------------------------------------------------------------------------------------------
     private void EndDay()
     {
         if (IsGameEnd()) return;
 
         DaysRemaining--;
         UpdateDaysRemainingText();
-		Background bg = backObject.GetComponent<Background> ();
+        Background bg = backObject.GetComponent<Background>();
 
         if (ActionCardSelected) ActionCardSelected.SetSelected(false);
 
@@ -246,8 +248,8 @@ public class GameStateManager : MonoBehaviour
         bool isWinOrLose = SolveLose();
         if (isWinOrLose) return;
 
-        DayOrNight = EDayNight.Night;
-        bg.SetSprite(DayOrNight);
+        GameState = EGameState.Night;
+        bg.SetSprite(GameState);
 
         //GameplayScreen.SetActive(false);
         WinScreen.SetActive(false);
@@ -260,10 +262,10 @@ public class GameStateManager : MonoBehaviour
     {
         if (IsGameEnd()) return;
 
-		Background bg = backObject.GetComponent<Background> ();
+        Background bg = backObject.GetComponent<Background>();
 
-        DayOrNight = EDayNight.Day;
-        bg.SetSprite(DayOrNight);
+        GameState = EGameState.Day;
+        bg.SetSprite(GameState);
 
         TimeRemaining = DayLength;
 
@@ -288,7 +290,7 @@ public class GameStateManager : MonoBehaviour
             Rooms.Clear();
             return true;
         }
-        
+
         return false;
     }
 
@@ -334,15 +336,16 @@ public class GameStateManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-	private bool RandBool(float Chance)
+    private bool RandBool(float Chance)
     {
-        return UnityEngine.Random.value <= Chance;
+        return Random.value <= Chance;
     }
 
     // ------------------------------------------------------------------------------------------------------------------
     private void ClickOnIncorrectRoom()
     {
-        snd.PlaySound("error");
-		ActionCardSelected.Shake ();
+        Snd.PlaySound("error");
+        ActionCardSelected.Shake();
+        ActionCardSelected.SetSelected(false);
     }
 }

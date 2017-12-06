@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-	public Sprite day;
-	public Sprite night;
+    public Sprite day;
+    public Sprite night;
     public Color c_day;
-	public Color c_night;
-	public SpriteRenderer back;
+    public Color c_night;
+    public SpriteRenderer back;
 
-	public void SetSprite(GameStateManager.EDayNight dayOrNight)
+    // ------------------------------------------------------------------------------------------------------------------
+    public void SetSprite(GameStateManager.EGameState dayOrNight)
     {
-        SpriteRenderer spr = GetComponent<SpriteRenderer> ();
+        SpriteRenderer spr = GetComponent<SpriteRenderer>();
         if (spr == null) return;
 
-        switch(dayOrNight)
+        switch (dayOrNight)
         {
-            case GameStateManager.EDayNight.Day:
+            case GameStateManager.EGameState.Day:
                 spr.sprite = day;
                 back.color = c_day;
                 break;
-            case GameStateManager.EDayNight.Night:
+            case GameStateManager.EGameState.Intro:
+            case GameStateManager.EGameState.Night:
                 spr.sprite = night;
                 back.color = c_night;
                 break;

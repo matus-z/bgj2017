@@ -19,30 +19,30 @@ public class Room : MonoBehaviour
     public int Row;
     public int Col;
 
-	public Sprite[] Bcg;
-	public Sprite[] Frg;
-	private SpriteRenderer bcgrender;
-	private SpriteRenderer frgrender;
-	private SpriteRenderer transrender;
-	private float trans = 1.0f;//transition effect
-	public float transTime = 1.0f; 
+    public Sprite[] Bcg;
+    public Sprite[] Frg;
+    private SpriteRenderer bcgrender;
+    private SpriteRenderer frgrender;
+    private SpriteRenderer transrender;
+    private float trans = 1.0f;//transition effect
+    public float transTime = 1.0f;
 
     // ------------------------------------------------------------------------------------------------------------------
     private void Start()
     {
         RoomState = ERoomState.HeadGear;
-		bcgrender = GetComponentsInChildren<SpriteRenderer> ()[1];
-		frgrender = GetComponentsInChildren<SpriteRenderer> ()[2];
-		transrender = GetComponentsInChildren<SpriteRenderer> ()[3];
+        bcgrender = GetComponentsInChildren<SpriteRenderer>()[1];
+        frgrender = GetComponentsInChildren<SpriteRenderer>()[2];
+        transrender = GetComponentsInChildren<SpriteRenderer>()[3];
         RedrawSprite();
     }
 
     // ------------------------------------------------------------------------------------------------------------------
-	public void Rotate(int angle)
+    public void Rotate(int angle)
     {
-        frgrender = GetComponentsInChildren<SpriteRenderer> () [2];
-		frgrender.transform.Rotate (new Vector3 (0, 0, angle));
-	}
+        frgrender = GetComponentsInChildren<SpriteRenderer>()[2];
+        frgrender.transform.Rotate(new Vector3(0, 0, angle));
+    }
 
     // ------------------------------------------------------------------------------------------------------------------
     private void OnMouseDown()
@@ -56,27 +56,29 @@ public class Room : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     public void ChangeRoomState(int change)
     {
-        int rsNum = (int) RoomState + change;
+        int rsNum = (int)RoomState + change;
         if (rsNum < 0) rsNum = 0;
         if (rsNum > 3) rsNum = 3;
-		trans = 1.0f;
-        RoomState = (ERoomState) rsNum;
+        trans = 1.0f;
+        RoomState = (ERoomState)rsNum;
         RedrawSprite();
     }
-    
+
     // ------------------------------------------------------------------------------------------------------------------
     private void RedrawSprite()
     {
-		bcgrender.sprite = Bcg[(int)RoomState];
-		frgrender.sprite = Frg [(int)RoomState];
+        bcgrender.sprite = Bcg[(int)RoomState];
+        frgrender.sprite = Frg[(int)RoomState];
     }
 
-	private void FixedUpdate(){
-
-		if (trans > 0.0f) {
-			trans -= Time.deltaTime / transTime;
-			transrender.color = new Color (1, 1, 1, trans);
-		}
-		RedrawSprite ();
-	}
+    // ------------------------------------------------------------------------------------------------------------------
+    private void FixedUpdate()
+    {
+        if (trans > 0.0f)
+        {
+            trans -= Time.deltaTime / transTime;
+            transrender.color = new Color(1, 1, 1, trans);
+        }
+        RedrawSprite();
+    }
 }

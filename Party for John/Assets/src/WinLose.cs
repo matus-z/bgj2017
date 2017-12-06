@@ -9,9 +9,9 @@ public class WinLose : MonoBehaviour
     // ------------------------------------------------------------------------------------------------------------------
     private void OnMouseDown()
     {
-		GameObject gameState = GameObject.Find ("GameState");
-		GameStateManager gsm = gameState.GetComponent<GameStateManager> ();
-		gsm.StartGame ();
-		this.gameObject.SetActive (false);
+        GameObject gameState = GameObject.Find("GameState");
+        GameStateManager gsm = gameState.GetComponent<GameStateManager>();
+        gsm.StartGame();
+        gameObject.SetActive(false);
     }
 }
